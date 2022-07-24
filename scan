@@ -1,0 +1,20 @@
+#!/bin/sh
+
+format='png'
+
+[[ -z "$1" ]] && filename=$(echo "" | dmenu -f -p "Provide filename") || filename=$1
+[[ -z "$filename" ]] && echo "File name not provided" && exit 1
+
+device=$(scanimage -f "%d%n" -n | dmenu -l 15 -p "Select printer:")
+[[ -z "$device" ]] && echo "Device not selected" && exit 1
+
+resolution=$(scanimage -d $device -A -n | grep 'resolution auto' | sed -r 's/(--resolution auto[|]{2})//g; s/\[(\w){2,3}\]//g; s/ //g; s/dpi//g; s/\|/\n/g' | dmenu -l 15 -p "Provide resolution (default 150dpi)")
+
+mode=$(scanimage -d $device -A -n | grep 'mode auto' | sed -r 's/(--mode)//g; s/\[(\w){4,8}\]//g; s/ //g; s/\|/\n/g' | dmenu -l 15 -p "Provide mode:")
+
+[[ -z "$resolution" ]] && resolution='150'
+[[ -z "$mode" ]] && mode="Color"
+
+resdpi=$resolution"dpi"
+
+scanimage -d $device --resolution $resdpi --mode $mode --format $format -o $filename".png" -p 1>&2

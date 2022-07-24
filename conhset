@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# aventho 00:22:BB:70:1F:08
+
+bluetoothctl << EOF
+connect 00:22:BB:70:1F:08

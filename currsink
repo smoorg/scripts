@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pacmd list-sinks | grep -E '(\*)' | awk -F': ' '{print $2}'

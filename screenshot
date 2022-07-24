@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#filename="$SCREENSHOT_DIR/$(date +"%Y-%m-%d_%H:%M:%S").png"
+
+if [ "$1" = "-s" ]; then
+	maim $@ | xclip -sel clipboard -target image/png
+else
+	maim -d 3 | xclip -sel clipboard -target image/png
+fi
+notify-send 'Screenshot copied!' #"$filename created" &
+

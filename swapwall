@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -f "$1" ]; then
+	cp $1 $WALLPAPER_DIR
+fi
+sxiv -tro $WALLPAPERS_DIR | xargs -I{} cp -f {} $WALLPAPER_DIR && [[ -x $SCRIPTS_DIR/setwall ]] && $SCRIPTS_DIR/setwall
+echo "done"

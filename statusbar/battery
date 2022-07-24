@@ -1,0 +1,34 @@
+#!/bin/sh
+
+b_icon=''
+battery=$(/sys/class/power_supply/BAT0/capacity)
+plugged=$(acpi -a | grep on-line | wc -l)
+
+case $((
+	(battery < 10) 			* 1 +
+	(battery >= 10 && battery < 20)	* 2 +
+	(battery >= 20 && battery < 30)	* 3 +
+	(battery >= 30 && battery < 40)	* 4 +
+	(battery >= 40 && battery < 50)	* 5 +
+	(battery >= 50 && battery < 60)	* 6 +
+	(battery >= 60 && battery < 70)	* 7 +
+	(battery >= 70 && battery < 80)	* 8 +
+	(battery >= 80 && battery < 90)	* 9 +
+	(battery >= 90)			* 10)) in
+	(1) b_icon=;;
+	(2) b_icon=;;
+	(3) b_icon=;;
+	(4) b_icon=;;
+	(5) b_icon=;;
+	(6) b_icon=;;
+	(7) b_icon=;;
+	(8) b_icon=;;
+	(9) b_icon=;;
+	(10) b_icon=;;
+esac
+
+if [[ $plugged -eq "1" ]]; then
+	b_icon=""
+fi
+
+echo "$b_icon $battery%"

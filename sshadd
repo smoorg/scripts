@@ -1,0 +1,6 @@
+#!/bin/sh
+
+KEY=$(ls $HOME/.ssh/ | dmenu -l 30 -p "Pick key to add to ssh agent:")
+
+[ -z $KEY ] && echo "no key provided, aborting" && exit 1
+ssh-add "$HOME/.ssh/$KEY"

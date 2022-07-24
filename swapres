@@ -1,0 +1,23 @@
+#!/bin/sh
+
+resolutions=(
+    "1920x1080"
+    "2560x1440"
+    "3440x1440"
+)
+
+monitor=$(
+  xrandr --listmonitors |\
+  tail -n +2 |\
+  awk '{ print $4 }' |\
+  dmenu -l 5 -p "Pick monitor"
+)
+
+res=$(
+  printf "%s\n" "${resolutions[@]}" |\
+    dmenu -l 5 -p "Pick resolution"
+)
+
+xrandr --output $monitor --mode $res
+
+

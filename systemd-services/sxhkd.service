@@ -1,0 +1,9 @@
+[Unit]
+Description=Simple X Hotkey Daemon
+Documentation=man:sxhkd(1)
+
+[Service]
+ExecStart=/usr/bin/sxhkd -c $XDG_CONFIG_HOME/sxhkd/sxhkdrc
+ExecReload=/usr/bin/killall sxhkd
+[Install]
+WantedBy=graphical.target

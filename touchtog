@@ -1,0 +1,14 @@
+#!/bin/sh
+deviceid=$(xinput list | grep 'ALP0016' | awk -F'[=[]' '{print $2}')
+prop=$(xinput list-props $deviceid | grep Enabled | awk -F'[()]' '{print $2}')
+enabled=$(xinput list-props $deviceid | grep Enabled | awk '{print $4}')
+
+echo $prop
+echo $enabled
+if [[ "$enabled" -eq "1" ]]; then
+	xinput set-prop $deviceid $prop 0
+	echo "touchpad off"
+else
+	xinput set-prop $deviceid $prop 1
+	echo "touchpad on"
+fi

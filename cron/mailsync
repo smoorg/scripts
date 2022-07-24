@@ -1,0 +1,1 @@
+*/30 * * * * DISPLAY=:0 /usr/bin/mailsync

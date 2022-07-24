@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ -n "$(pgrep -x pulseaudio)" && -z "$(pgrep -x pipewire-pulse)" ]]; then
+	curr_volume=$(pactl list sinks |\
+		grep '^[[:space:]]Poziom głośności:' |\
+		head -n $(( $(currsink) +1 )) |\
+		tail -n 1 |\
+		sed -e 's,.* \([0-9][0-9]*\)%.*,\1,');
+else
+	curr_volume=$(amixer sget Master | grep % | awk -F"[][]" '{print $2}' | head -n 1)
+fi
+
+echo "$curr_volume"

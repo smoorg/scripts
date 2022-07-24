@@ -1,0 +1,12 @@
+#!/bin/bash
+base_vol="Base Volume"
+
+[ "$LANG" = "pl_PL.UTF-8" ] && base_vol="Poziom głośności"
+
+if [[ -n "$(pgrep -x pulseaudio)" ]]; then
+	curr_volume=$(pactl list sinks | grep -E "$base_vol:" | head -n $(( $(currsink) +1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,');
+else
+	curr_volume=$(awk -F"[][]" '/dB/' {print $2} <(amixer sget Master))
+fi
+
+echo "$curr_volume%"

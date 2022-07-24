@@ -1,0 +1,70 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: KeepassXC Cloud Sync (KCS)
+# Description	: A keepassxc integration with rclone for database merging and send the merge results to the cloud to have sync-up db.
+# Args          :
+# Dependencies 	: keepassxc, rclone, fzf
+# Author       	: Mateusz Reszka                                                
+# Email         : mateusz@mateuszreszka.xyz                                           
+
+#a directory where local files (database, keepass key) are stored
+find_main_folder="$HOME/KeePass"
+
+# directory where downloaded kdbx files will be stored
+tmp_copy_dir="/tmp"
+
+# directory for backups
+backup_dir="$HOME/.local/share/kcs/backups"
+backup_file_name="$(date +%F_%H:%M:%S).kdbx" # i.e. 2020-02-02_13:14:59.kdbx
+backup_full_dir="$backup_dir/$backup_file_name"
+
+[ -d "$backup_dir" ] || echo "created" mkdir -p $backup_dir
+
+# list remotes and pick one
+remote=$(rclone listremotes | sed 's/://g' | fzf --header='Provide remote name')
+
+# list remote kdbx files and pick one 
+remote_file=$(rclone lsl "onedrive:" --include "*.kdbx" --max-depth 2 | awk '{print $4}' |\
+	fzf --header='Provide remote file to merge with local keepass db')
+
+# list local kdbx files and pick one
+local_file=$(find $find_main_folder -iname "*.kdbx" |\
+	fzf --header="Pick which local db to merge with $remote:$remote_file")
+
+echo "download"
+# downloads the file to tmp dir
+rclone copy -v "$remote:$remote_file" "$tmp_copy_dir"
+
+echo"download finished"
+
+read -n 1 -p 'Do you want to backup current db? y/n (default: n)' yn
+echo
+
+# create backup directory if does not exist; -p for recursive folder creation
+if [ "$yn" = y ]; then
+	[ ! -d "$backup_dir" ] &&\
+		mkdir -p "$backup_dir" &&\
+		echo "backup directory created: $backup_dir"
+
+	cp "$local_file" "$backup_full_dir"
+	echo "backup file created at $backup_full_dir"
+fi
+
+read -n 1 -p 'Do you want to use key file? y/n (default: n)' has_key
+echo
+
+echo "Merging..."
+
+[ "$has_key" = y ] &&\
+	key=$(find $find_main_folder | fzf --header="Provide a key file") &&\
+	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials -k $key ||\
+	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials
+
+echo "Merge done!"
+
+echo "Uploading..."
+# uploads merged database to cloud
+rclone copy -v "$local_file" "$remote:"
+
+echo "Uploading done!"

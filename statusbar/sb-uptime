@@ -1,0 +1,3 @@
+#!/bin/sh
+
+uptime --pretty | sed 's/up //g; s/ hour\| hours/h/g; s/ minute\| minutes/m/g; s/,//g'

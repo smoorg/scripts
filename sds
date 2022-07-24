@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pactl set-default-sink $1
+switchsink

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+( pgrep -c ffmpeg > 0 ) &&\
+  pkill ffmpeg &&\
+  notify-send "Recording stopped!" &&\
+  exit 0
+
+filename=$1
+[ -z "$1" ] && filename="$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
+
+geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
+
+notify-send "Recording started!"
+ffmpeg \
+    -framerate 30 \
+    -f x11grab $geometry \
+    -pix_fmt yuv420p \
+    -preset slow \
+    -crf 22 \
+    -c:a aac \
+    -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" \
+    "$filename"

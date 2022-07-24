@@ -1,0 +1,10 @@
+#!/bin/sh
+
+date1=$(date -d "$1" +%s)
+date2=$(date -d "$2" +%s)
+
+DIFF=$(echo "$date2-$date1" | bc)
+
+result=$(TZ=UTC date -d @$DIFF +%H:%M:%S)
+
+echo $result

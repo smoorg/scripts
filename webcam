@@ -1,0 +1,8 @@
+#!/bin/sh
+
+WEBCAM=/dev/video0
+
+mpv av://v4l2:$WEBCAM \
+  --demuxer-lavf-o=video_size=720x720 \
+  --profile=low-latency \
+  --untimed

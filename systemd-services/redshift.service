@@ -1,0 +1,9 @@
+[Unit]
+Description=Redshift
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/redshift -l 54.39:18.61
+
+[Install]
+WantedBy=graphical.target

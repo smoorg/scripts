@@ -1,0 +1,36 @@
+#!/bin/sh
+
+channel_url=$1
+
+has_user=$(echo $channel_url | grep "/user/" | wc -l)
+has_channel=$(echo $channel_url | grep "/channel/" | wc -l)
+has_playlist=$(echo $channel_url | grep "/playlist?list=" | wc -l)
+
+url="https://www.youtube.com/feeds/videos.xml"
+
+user_rss()
+{
+	user_id=$(echo $channel_url | awk -F'/user/' '{print $2}')
+	params="user=$user_id"
+}
+
+channel_rss()
+{
+	channel_id=$(echo $channel_url | awk -F'/channel/' '{print $2}')
+	params="channel_id=$channel_id"
+}
+
+playlist_rss()
+{
+	playlist_id=$(echo $channel_url | awk -F'/playlist' '{print $2}' | sed 's/?list=//g')
+	params="playlist_id=$playlist_id"
+}
+
+[ "$has_user" = 1 ] && user_rss;
+[ "$has_channel" = 1 ] && channel_rss;
+[ "$has_playlist" = 1 ] && playlist_rss;
+
+echo "$url?$params"
+
+
+

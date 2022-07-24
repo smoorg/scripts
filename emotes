@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# example how to add new content over vim: ctrl+v u208c
+pick=$(echo -e "✓ check tick
+€ euro currency
+┌ box corner top left
+└ box corner bottom left
+┐ box corner top right
+┘ box corner bottom right
+─ box line horizontal
+│ box line vertical
+┼ box middle
+┬ box side top
+┴ box side bottom
+├ box side left
+┤ box side right
+" | dmenu -l 10)
+
+# stop there if nothing has been picked
+[ -z "$pick" ] && exit 0
+
+# pick only first character and copy it
+echo "${pick%% *}" | tr -d '\n' | xclip -i -sel clip
+
+notify-send "Unicode copied: '$(xclip -sel clipboard -o)'"

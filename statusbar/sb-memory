@@ -1,0 +1,3 @@
+#!/bin/sh
+
+free --si -h | grep -E "Pam|Mem" | awk '{print $3"/"$2}'

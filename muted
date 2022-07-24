@@ -1,0 +1,16 @@
+#!/bin/sh
+
+
+#list=$(pacmd list-sinks | grep -E 'index|muted' | sed 's/\s\smuted/, muted/g') 
+#echo $list | grep "index: $(currsink)"
+
+# regex joins lines so that muted option is align with index and we can grep by default sink
+
+muted=$(pacmd list-sinks |\
+	grep -E 'index|muted' |\
+	sed 'N;s/\n\t//g; s/muted/, muted/g' |\
+	grep '*' |\
+	tail -c 3)
+
+#muted=$(pacmd list-sinks | grep -E '^*' | grep muted | cut -d ':' -f2)
+[[ "$muted" == "no" ]] && echo 0 || echo 1
