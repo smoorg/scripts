@@ -1,0 +1,12 @@
+#!/bin/sh
+
+sinkid=$1
+
+[[ -z $sinkid ]] && sinkid=$(currsink);
+
+sinkids=$(pacmd list-sinks | grep -e 'index' | awk -F': ' '{print $2}')
+
+[[ "$sinkids" =~ "$sinkid" ]] && pactl set-sink-mute $sinkid toggle || echo "sink not found"; exit 2
+
+
+

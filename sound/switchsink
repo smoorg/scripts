@@ -1,0 +1,8 @@
+#!/bin/sh
+
+to_move=$(pacmd list-sink-inputs | grep index | awk -F ': ' '{print $2}')
+def_sink=$(currsink)
+
+for i in $to_move; do
+pacmd move-sink-input $i $def_sink
+done
