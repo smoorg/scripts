@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Screenshot (screenshot)
 # Description	: Captures screen and saves it to clipboard
-# Args			:
+# Args		:
 # Dependencies	: main, xclip, dunst
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 if [ "$1" = "-s" ]; then

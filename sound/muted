@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: muted
 # Description	: Checks whether default sink is muted or not. Returns 0 or 1.
-# Args			:
+# Args		:
 # Dependencies	: pactl, tail, tr
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 muted=$(pactl get-sink-mute $(currsink) | tail -c 4 | tr -d ' ')

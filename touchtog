@@ -3,12 +3,12 @@
 ###################################################################
 # Script Name	: Toggle touchpad (touchtog)
 # Description	: Script to toggle touchpad when not needed.
-#				  It finds device id and toggle it's `enable` prop.
-#				  You have to change $touch_device to your own.
-# Args			:
+#		  It finds device id and toggle it's `enable` prop.
+#		  You have to change $touch_device to your own.
+# Args		:
 # Dependencies	: xinput, gawk, grep
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 touch_device='ALP0016'

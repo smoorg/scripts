@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: volume
 # Description	: Provides info about current volume level on default sink.
-# Args			:
+# Args		:
 # Dependencies	: amixer, gawk, head, pactl, pgrep, tr, currsink
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 if [[ -n "$(pgrep -x pulseaudio)" || -n "$(pgrep -x pipewire-pulse)" ]]; then

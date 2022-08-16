@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: webcam
 # Description	: Uses mpv to show webcam.
-# Args			:
+# Args		:
 # Dependencies	: mpv, v4l2
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 WEBCAM=/dev/video0

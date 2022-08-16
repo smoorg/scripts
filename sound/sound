@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: sound
 # Description	: Manages volume, based on what process is running (alsa, pulse or pipewire).
-# Args			:
+# Args		:
 # Dependencies	: pactl, pgrep, amixer, dunst, currsink, volume
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 current_sink=$(currsink)

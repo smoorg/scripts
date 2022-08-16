@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Pactl list (pl)
 # Description	: Lists sinks.
-# Args			:
+# Args		:
 # Dependencies	: pactl
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 pactl list short sinks

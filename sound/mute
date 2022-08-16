@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: mute
 # Description	: Toggles mute to default sink.
-# Args			:
+# Args		:
 # Dependencies	: gawk, pactl
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 sinkid=$1

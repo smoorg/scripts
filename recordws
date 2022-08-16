@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Record whole screen (recordws)
 # Description	: Similar to `record` but hardcoded areas.
-# Args			: $1 - filename
+# Args		: $1 - filename
 # Dependencies	: ffmpeg 
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 filename=$1

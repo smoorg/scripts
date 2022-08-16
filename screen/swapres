@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Swap resolution (swapres)
 # Description	: Quick way to switch between resolutions when needed.
-# Args			:
+# Args		:
 # Dependencies	: dmenu, gawk, tail, xrandr
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 monitor=$(

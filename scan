@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: scan
 # Description	: A simple script to pick scanner and scan picture.
-# Args			:
+# Args		:
 # Dependencies	: dmenu, scanimage
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 format='png'

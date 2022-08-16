@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Light (light)
 # Description	: Simple script to manage monitor brightness.
-# Args			: $1 - number of percentages decrease/increase brightness, i.e. "5" or "-10"
+# Args		: $1 - number of percentages decrease/increase brightness, i.e. "5" or "-10"
 # Dependencies	: xbacklight, cut, dunst
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 [ -z "$1" ]  && exit 1;

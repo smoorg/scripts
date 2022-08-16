@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: hibernate 
 # Description	: Dumb alias to systemctl suspend
-# Args			:
+# Args		:
 # Dependencies	: systemctl
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 systemctl suspend &

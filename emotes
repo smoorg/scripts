@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Emotes
 # Description	: A dumb way to store icons along with their tags to make them searchable
-# Args			:
+# Args		:
 # Dependencies	: dmenu, tr, xclip, dunst
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 # example how to add new content over vim: ctrl+v u208c

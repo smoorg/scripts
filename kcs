@@ -3,11 +3,12 @@
 ###################################################################
 # Script Name	: KeepassXC Cloud Sync (KCS)
 # Description	: A keepassxc integration with rclone for database.
-# 				  Merges the database and sends it to the cloud.
+# 		  Merges the database and sends it to the cloud.
 # Args          :
 # Dependencies 	: mkdir, cp read, gawk, keepassxc-cli, rclone, fzf
 # Author       	: Mateusz Reszka
 # Email         : mateusz@mateuszreszka.xyz
+###################################################################
 
 #a directory where local files (database, keepass key) are stored
 find_main_folder="$HOME/KeePass"

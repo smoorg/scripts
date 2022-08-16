@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Substring dates (subdate)
 # Description	: Substrings dates and echoes difference in date format. 
-# Args			: $1 - date1, $2 - date2
+# Args		: $1 - date1, $2 - date2
 # Dependencies	: date, bc
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 date1=$(date -d "$1" +%s)

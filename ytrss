@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Youtube RSS (ytrss)
 # Description	: Provides RSS to youtube videos based on the channel/user/playlist.
-# Args			:
+# Args		:
 # Dependencies	: gawk
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 channel_url=$1

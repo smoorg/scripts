@@ -3,11 +3,11 @@
 ###################################################################
 # Script Name	: Set wallpaper (setwall)
 # Description	: Script to change a wallpaper by calling feh in $1 if provided, otherwise in $WALLPAPER_DIR.
-#				  and call `setwall`. If no file provided sxiv is opened to pick one.
-# Args			: $1 - (optional) wallpaper directory
+#		  and call `setwall`. If no file provided sxiv is opened to pick one.
+# Args		: $1 - (optional) wallpaper directory
 # Dependencies	: feh
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 [[ -f $1 ]] && feh --bg-fill $1 && exit

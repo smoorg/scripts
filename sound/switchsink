@@ -3,10 +3,10 @@
 ###################################################################
 # Script Name	: Switch sink (switchsink)
 # Description	: Moves all the inputs to the default sink.
-# Args			:
+# Args		:
 # Dependencies	: pactl, gawk, currsink
-# Author		: Mateusz Reszka
-# Email			: mateusz@mateuszreszka.xyz
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 to_move=$(pactl list sink-inputs short | awk -F ' ' '{print $1}')
