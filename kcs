@@ -6,8 +6,8 @@
 # 				  Merges the database and sends it to the cloud.
 # Args          :
 # Dependencies 	: mkdir, cp read, gawk, keepassxc-cli, rclone, fzf
-# Author       	: Mateusz Reszka                                                
-# Email         : mateusz@mateuszreszka.xyz                                           
+# Author       	: Mateusz Reszka
+# Email         : mateusz@mateuszreszka.xyz
 
 #a directory where local files (database, keepass key) are stored
 find_main_folder="$HOME/KeePass"
@@ -27,42 +27,49 @@ remote=$(rclone listremotes | sed 's/://g' | fzf --header='Provide remote name')
 
 # list remote kdbx files and pick one 
 remote_file=$(rclone lsl "onedrive:" --include "*.kdbx" --max-depth 2 | awk '{print $4}' |\
-	fzf --header='Provide remote file to merge with local keepass db')
+	fzf --header='Provide remote keepass db directory')
 
 # list local kdbx files and pick one
 local_file=$(find $find_main_folder -iname "*.kdbx" |\
-	fzf --header="Pick which local db to merge with $remote:$remote_file")
+	fzf --header="Pick which local keepass directory")
 
-echo "download"
-# downloads the file to tmp dir
-rclone copy -v "$remote:$remote_file" "$tmp_copy_dir"
+read -n 1 -p "Do you want to merge it? If not it will simply replace cloud's version with your local copy. y/n (default:y)" merge
 
-echo"download finished"
+if [ "$merge" = y ]; then
 
-read -n 1 -p 'Do you want to backup current db? y/n (default: n)' yn
-echo
+  echo "download"
+  # downloads the file to tmp dir
+  rclone copy -v "$remote:$remote_file" "$tmp_copy_dir"
 
-# create backup directory if does not exist; -p for recursive folder creation
-if [ "$yn" = y ]; then
-	[ ! -d "$backup_dir" ] &&\
-		mkdir -p "$backup_dir" &&\
-		echo "backup directory created: $backup_dir"
+  echo "download finished"
 
-	cp "$local_file" "$backup_full_dir"
-	echo "backup file created at $backup_full_dir"
+  read -n 1 -p 'Do you want to backup current db? y/n (default: n)' yn
+  echo
+
+  # create backup directory if does not exist; -p for recursive folder creation
+  if [ "$yn" = y ]; then
+  	[ ! -d "$backup_dir" ] &&\
+  		mkdir -p "$backup_dir" &&\
+  		echo "backup directory created: $backup_dir"
+
+    cp "$local_file" "$backup_full_dir"
+  	echo "backup file created at $backup_full_dir"
+  fi
+  
+  read -n 1 -p 'Do you want to use key file? y/n (default: n)' has_key
+  echo
+
+  echo "Merging..."
+
+  if [ "$has_key" = y ]; then
+  	key=$(find $find_main_folder | fzf --header="Provide a key file") &&\
+  	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials -k $key
+  else
+  	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials
+  fi
+
+  echo "Merge done!"
 fi
-
-read -n 1 -p 'Do you want to use key file? y/n (default: n)' has_key
-echo
-
-echo "Merging..."
-
-[ "$has_key" = y ] &&\
-	key=$(find $find_main_folder | fzf --header="Provide a key file") &&\
-	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials -k $key ||\
-	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials
-
-echo "Merge done!"
 
 echo "Uploading..."
 # uploads merged database to cloud
