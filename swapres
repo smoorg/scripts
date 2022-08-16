@@ -1,10 +1,12 @@
 #!/bin/sh
 
-resolutions=(
-    "1920x1080"
-    "2560x1440"
-    "3440x1440"
-)
+###################################################################
+# Script Name	: Swap resolution (swapres)
+# Description	: Quick way to switch between resolutions when needed.
+# Args			:
+# Dependencies	: dmenu, gawk, tail, xrandr
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
 
 monitor=$(
   xrandr --listmonitors |\
@@ -13,11 +15,17 @@ monitor=$(
   dmenu -l 5 -p "Pick monitor"
 )
 
+# picks a subset using -v flag and p condition to print only those resolutions, that are under certain monitor
+# tail -n with `+` sign tells tail to start from certain line, we skip first one as it's monitor's name not a resolution 
+# another awk just removes refresh rates as not needed
 res=$(
-  printf "%s\n" "${resolutions[@]}" |\
-    dmenu -l 5 -p "Pick resolution"
+ xrandr |\
+    awk -v monitor="$monitor connected" '/connected/ {p = 0}
+    	$0 ~ monitor {p = 1}
+        p' |\
+    tail -n +2 |\
+    dmenu -l 15 -p "Pick resolution" |\
+    awk -F' ' '{print $1}'
 )
 
 xrandr --output $monitor --mode $res
-
-
