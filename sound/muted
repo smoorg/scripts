@@ -1,7 +1,15 @@
 #!/bin/sh
 
-default_sink=$(pactl get-default-sink)
-muted=$(pactl get-sink-mute $default_sink | tail -c 4 | tr -d ' ')
+###################################################################
+# Script Name	: muted
+# Description	: Checks whether default sink is muted or not. Returns 0 or 1.
+# Args			:
+# Dependencies	: pactl, tail, tr
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
+muted=$(pactl get-sink-mute $(currsink) | tail -c 4 | tr -d ' ')
 
 [[ "$muted" == "no" ]] && echo 0
 [[ "$muted" == "yes" ]] && echo 1

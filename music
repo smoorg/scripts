@@ -1,3 +1,12 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: music
+# Description	: Sort of alias. Triggers mpc database update and runs ncmpcpp.
+# Args			:
+# Dependencies	: mpc, ncmpcpp
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 mpc update --wait && ncmpcpp

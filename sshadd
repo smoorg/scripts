@@ -1,5 +1,15 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: SSH add key (sshadd)
+# Description	: Lists ~/.ssh directory and puts it to dmenu. 
+#				  Makes it easier to pick an SSH key and add it to ssh-agent
+# Args			:
+# Dependencies	: dmenu, ssh, ssh-agent, ssh-add
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 KEY=$(ls $HOME/.ssh/ | dmenu -l 30 -p "Pick key to add to ssh agent:")
 
 [ -z $KEY ] && echo "no key provided, aborting" && exit 1

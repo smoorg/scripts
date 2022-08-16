@@ -1,5 +1,14 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: Youtube RSS (ytrss)
+# Description	: Provides RSS to youtube videos based on the channel/user/playlist.
+# Args			:
+# Dependencies	: gawk
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 channel_url=$1
 
 has_user=$(echo $channel_url | grep "/user/" | wc -l)

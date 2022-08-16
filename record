@@ -1,5 +1,15 @@
 #!/bin/bash
 
+###################################################################
+# Script Name	: Record (record)
+# Description	: Records screen's area provided by `slop`.
+#				  When called second time the process gets killed, handy for a keybinding.
+# Args			: $1 - filename
+# Dependencies	: ffmpeg, dunst, slop, date
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 ( pgrep -c ffmpeg > 0 ) &&\
   pkill ffmpeg &&\
   notify-send "Recording stopped!" &&\

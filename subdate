@@ -1,5 +1,14 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: Substring dates (subdate)
+# Description	: Substrings dates and echoes difference in date format. 
+# Args			: $1 - date1, $2 - date2
+# Dependencies	: date, bc
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 date1=$(date -d "$1" +%s)
 date2=$(date -d "$2" +%s)
 

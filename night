@@ -1,1 +1,13 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: night
+# Description	: Redshift alias
+# Args			:
+# Dependencies	: redshift
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
+
 redshift -P -O $@ 

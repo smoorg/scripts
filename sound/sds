@@ -1,4 +1,13 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: Set default sink (sds)
+# Description	: Sets default sink to the provided one.
+# Args			: $1 - sinkid or name
+# Dependencies	: pactl, switchsink
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 pactl set-default-sink $1
 switchsink

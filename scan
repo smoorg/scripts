@@ -1,5 +1,14 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: scan
+# Description	: A simple script to pick scanner and scan picture.
+# Args			:
+# Dependencies	: dmenu, scanimage
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 format='png'
 
 [[ -z "$1" ]] && filename=$(echo "" | dmenu -f -p "Provide filename") || filename=$1

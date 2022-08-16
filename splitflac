@@ -1,3 +1,13 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: Split .flac (splitflac)
+# Description	: Cuts flac file into pieces given being in the directory 
+#				  of .flac file with it's .cue description.
+# Args			:
+# Dependencies	: shntool
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 shntool split -f *.cue -o flac -t '%n - %p - %t' *.flac

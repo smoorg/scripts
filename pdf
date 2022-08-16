@@ -1,1 +1,12 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: pdf
+# Description	: PDF application alias
+# Args			:
+# Dependencies	: xreader
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 xreader $1

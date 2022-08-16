@@ -1,5 +1,16 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: Mark time (marktime)
+# Description	: Creates a timestamp in $XDG_DATA_HOME/marktime/[date].
+#				  Useful to track time spend on certain activities.
+#				  Script `subdate` calculates diff between timestamps.
+# Args			:
+# Dependencies	: cat, tail, gawk, subdate
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 content=$@
 
 cur_date=$(date +'%Y-%m-%d')

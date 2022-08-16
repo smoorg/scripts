@@ -1,7 +1,17 @@
 #!/bin/sh
 
-if [ -f "$1" ]; then
-	cp $1 $WALLPAPER_DIR
-fi
-sxiv -tro $WALLPAPERS_DIR | xargs -I{} cp -f {} $WALLPAPER_DIR && [[ -x $SCRIPTS_DIR/setwall ]] && $SCRIPTS_DIR/setwall
-echo "done"
+###################################################################
+# Script Name	: Swap wallpaper (swapwall)
+# Description	: Script to change a wallpaper by copying a new one to respective folder 
+#				  and call `setwall`. If no file provided sxiv is opened to pick one.
+# Args			: a file directory
+# Dependencies	: cp, xargs, sxiv, setwall
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
+[ -f "$1" ] && cp $1 $WALLPAPER_DIR
+
+sxiv -tro $WALLPAPERS_DIR |\
+    xargs -I{} cp -f {} $WALLPAPER_DIR &&\
+    setwall

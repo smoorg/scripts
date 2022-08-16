@@ -1,5 +1,14 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: mute
+# Description	: Toggles mute to default sink.
+# Args			:
+# Dependencies	: gawk, pactl
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 sinkid=$1
 
 [[ -z $sinkid ]] && sinkid=$(currsink);

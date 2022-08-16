@@ -1,5 +1,19 @@
 #!/bin/sh
-deviceid=$(xinput list | grep 'ALP0016' | awk -F'[=[]' '{print $2}')
+
+###################################################################
+# Script Name	: Toggle touchpad (touchtog)
+# Description	: Script to toggle touchpad when not needed.
+#				  It finds device id and toggle it's `enable` prop.
+#				  You have to change $touch_device to your own.
+# Args			:
+# Dependencies	: xinput, gawk, grep
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
+touch_device='ALP0016'
+
+deviceid=$(xinput list | grep $touch_device | awk -F'[=[]' '{print $2}')
 prop=$(xinput list-props $deviceid | grep Enabled | awk -F'[()]' '{print $2}')
 enabled=$(xinput list-props $deviceid | grep Enabled | awk '{print $4}')
 

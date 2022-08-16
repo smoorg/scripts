@@ -7,6 +7,7 @@
 # Dependencies	: dmenu, gawk, tail, xrandr
 # Author		: Mateusz Reszka
 # Email			: mateusz@mateuszreszka.xyz
+###################################################################
 
 monitor=$(
   xrandr --listmonitors |\

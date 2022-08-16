@@ -1,5 +1,14 @@
 #!/bin/bash
 
+###################################################################
+# Script Name	: volume
+# Description	: Provides info about current volume level on default sink.
+# Args			:
+# Dependencies	: amixer, gawk, head, pactl, pgrep, tr, currsink
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 if [[ -n "$(pgrep -x pulseaudio)" || -n "$(pgrep -x pipewire-pulse)" ]]; then
     curr_volume=$(pactl get-sink-volume $(currsink) | awk -F'/' '{print $2}' | tr -d ' ')
 else

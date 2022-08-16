@@ -1,5 +1,14 @@
 #!/bin/sh
 
+###################################################################
+# Script Name	: webcam
+# Description	: Uses mpv to show webcam.
+# Args			:
+# Dependencies	: mpv, v4l2
+# Author		: Mateusz Reszka
+# Email			: mateusz@mateuszreszka.xyz
+###################################################################
+
 WEBCAM=/dev/video0
 
 mpv av://v4l2:$WEBCAM \
