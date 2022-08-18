@@ -10,10 +10,17 @@ If you'd like to use this repository in your PATH keep in mind there are a few f
 find $HOME/scripts -type d
 ```
 
+This will generate bunch of weird folders we don't really need related to git, so we can ignore them like so
+
+```sh
+find $HOME/scripts -type d ! -iwholename "*git*" -printf %p:
+```
+
 This will scrap every folder and subfolder inside scripts directory and we can use it to add them as additional records in `PATH`. Directories in `PATH` are splited by colon sign hence addigional `-printf` flag. 
 
 ```sh 
-export PATH=$PATH:/usr/local/games:/usr/local/bin:$HOME/.local/share/applications:$HOME/:$(find $HOME/scripts -type d -printf %p:)
+scripts_dirs=$(find $HOME/scripts -type d ! -iwholename "*git*" -printf %p:)
+export PATH=$PATH:/usr/local/games:/usr/local/bin:$HOME/.local/share/applications:$HOME/:$scripts_dirs
 ```
 
 ## Dependencies
