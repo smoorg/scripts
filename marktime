@@ -15,18 +15,18 @@ content=$@
 
 cur_date=$(date +'%Y-%m-%d')
 cur_time=$(date +'%H:%M:%S')
-epoch=$(date +%s)
 
 data_dir=$XDG_DATA_HOME/marktime
 
 # make sure data_dir exists
 mkdir -p $data_dir
+
 time_diff=''
 file="$data_dir/$cur_date"
 
 [ -e $file ] && prev_time=$(cat $file | tail -n 1 | awk '{print $2}') &&\
 	time_diff=$(subdate $prev_time $cur_time)
 
-row="$cur_date $cur_time $epoch $content $time_diff"
+row="$cur_date $cur_time $content $time_diff"
 
 echo $row >> $data_dir/$cur_date
