@@ -3,13 +3,15 @@
 ###################################################################
 # Script Name	: webcam
 # Description	: Uses mpv to show webcam.
-# Args		:
+# Args		: $1 - video number
 # Dependencies	: mpv, v4l2
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 WEBCAM=/dev/video0
+
+[ ! -z $1 ] && WEBCAM=/dev/video$1
 
 mpv av://v4l2:$WEBCAM \
   --demuxer-lavf-o=video_size=720x720 \
