@@ -73,7 +73,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 	- [screenshot](https://github.com/smoorg/scripts/blob/main/screen/screenshot)
 	- [setwall](https://github.com/smoorg/scripts/blob/main/screen/setwall) - sets wallpaper
 	- [showmonitors](https://github.com/smoorg/scripts/blob/main/screen/showmonitors) - lists monitors
-	- [swapres](https://github.com/smoorg/scripts/blob/main/screen/swapres) - changes resolution
+	- [swapres](https://github.com/smoorg/scripts/blob/main/screen/swapres) - changes resolution and refresh rate
 	- [swapwall](https://github.com/smoorg/scripts/blob/main/screen/swapwall) - replaces wallpaper file or runs sxiv to pick one and then calls setwall
 - pacman - scripts related to pacman
 	- [pacinst](https://github.com/smoorg/scripts/blob/main/pacman/pacinst) - copied from archlinux wiki; fzf based application installer

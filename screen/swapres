@@ -19,14 +19,21 @@ monitor=$(
 # picks a subset using -v flag and p condition to print only those resolutions, that are under certain monitor
 # tail -n with `+` sign tells tail to start from certain line, we skip first one as it's monitor's name not a resolution 
 # another awk just removes refresh rates as not needed
-res=$(
+record=$(
  xrandr |\
     awk -v monitor="$monitor connected" '/connected/ {p = 0}
     	$0 ~ monitor {p = 1}
         p' |\
     tail -n +2 |\
-    dmenu -l 15 -p "Pick resolution" |\
-    awk -F' ' '{print $1}'
+    dmenu -l 15 -p "Pick resolution"
 )
 
-xrandr --output $monitor --mode $res
+rate=$(echo $record |\
+    tr -d '*+' |\
+    awk '{for (f=1; f<=NF; f++) { if (f >1) print $f; } }' |\
+    dmenu -l 15 -p "Pick refresh rate"
+)
+
+resolution=$(echo $record | awk -F' ' '{print $1}')
+
+xrandr --output $monitor --mode $resolution --rate $rate
