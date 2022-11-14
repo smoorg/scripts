@@ -10,9 +10,12 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-selected=$(find $REPOS/ -maxdepth 4 -type d -name .git -prune |\
-    sed "s%$REPOS%%g; s/\/\.git//g" |\
-    dmenu -l 10)
+if [ ! -f /tmp/cdrepo ]; then
+    touch /tmp/cdrepo
+    find $REPOS/ -maxdepth 4 -type d -name .git -prune | sed "s%$REPOS%%g; s/\/\.git//g" > /tmp/cdrepo 
+fi
+
+selected=$(cat /tmp/cdrepo | dmenu -l 10)
 
 [ -n "$selected" ] && echo $REPOS$selected
 
