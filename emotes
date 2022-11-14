@@ -4,31 +4,17 @@
 # Script Name	: Emotes
 # Description	: A dumb way to store icons along with their tags to make them searchable
 # Args		:
-# Dependencies	: dmenu, tr, xclip, dunst
+# Dependencies	: dmenu, tr, xdotool 
+# Files used	: icons.txt
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 # example how to add new content over vim: ctrl+v u208c
-pick=$(echo -e "✓ check tick
-€ euro currency
-┌ box corner top left
-└ box corner bottom left
-┐ box corner top right
-┘ box corner bottom right
-─ box line horizontal
-│ box line vertical
-┼ box middle
-┬ box side top
-┴ box side bottom
-├ box side left
-┤ box side right
-" | dmenu -l 10)
+pick=$(cat $(dirname "$0")/icons.txt | dmenu -l 10)
 
 # stop there if nothing has been picked
 [ -z "$pick" ] && exit 0
 
-# pick only first character and copy it
-echo "${pick%% *}" | tr -d '\n' | xclip -i -sel clip
-
-notify-send "Unicode copied: '$(xclip -sel clipboard -o)'"
+# pick only first character and insert it
+xdotool type $(echo "${pick%% *}")

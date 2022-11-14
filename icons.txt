@@ -1,0 +1,13 @@
+✓ check tick
+€ euro currency
+┌ box corner top left
+└ box corner bottom left
+┐ box corner top right
+┘ box corner bottom right
+─ box line horizontal
+│ box line vertical
+┼ box middle
+┬ box side top
+┴ box side bottom
+├ box side left
+┤ box side right
