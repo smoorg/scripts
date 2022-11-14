@@ -10,7 +10,7 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-( pgrep -c ffmpeg > 0 ) &&\
+( pgrep -c ffmpeg > /dev/null ) &&\
   pkill ffmpeg &&\
   notify-send "Recording stopped!" &&\
   exit 0
