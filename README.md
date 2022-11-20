@@ -87,6 +87,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 - [scan](https://github.com/smoorg/scripts/blob/main/scan) - uses plugged in scanner and tries to scan image
 - [splitflac](https://github.com/smoorg/scripts/blob/main/splitflac) - splits flac file into pieces based on cue description
 - [sshadd](https://github.com/smoorg/scripts/blob/main/sshadd) - picks ssh key from dmenu to use with ssh-agent
+- [startdwm](https://github.com/smoorg/scripts/blob/main/startdwm) - while loop that reruns dwm every time it's binary has changed
 - [subdate](https://github.com/smoorg/scripts/blob/main/subdate) - subtracts two dates
 - [touchtog](https://github.com/smoorg/scripts/blob/main/touchtog) - uses `xinput` to toggle provided device
 - [webcam](https://github.com/smoorg/scripts/blob/main/webcam) - uses `mpv` to present webcam
