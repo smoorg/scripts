@@ -70,7 +70,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 	- [conmon](https://github.com/smoorg/scripts/blob/main/screen/conmon) - connect additional monitor (currently hardcoded to `right-of` so mostly for 2 monitors as of now)
 	- [light](https://github.com/smoorg/scripts/blob/main/screen/light) - increases and decreases brightness
 	- [night](https://github.com/smoorg/scripts/blob/main/screen/night) - runs redshift
-	- [screenshot](https://github.com/smoorg/scripts/blob/main/screen/screenshot)
+	- [screenshot](https://github.com/smoorg/scripts/blob/main/screen/screenshot) - copies screenshots to $SCREENSHOT_DIR as well as to your xclip
 	- [setwall](https://github.com/smoorg/scripts/blob/main/screen/setwall) - sets wallpaper
 	- [showmonitors](https://github.com/smoorg/scripts/blob/main/screen/showmonitors) - lists monitors
 	- [swapres](https://github.com/smoorg/scripts/blob/main/screen/swapres) - changes resolution and refresh rate
