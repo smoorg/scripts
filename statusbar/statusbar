@@ -1,0 +1,18 @@
+#!/bin/sh
+
+SEPARATOR=" | "
+
+sbar=""
+sbar+="TEMP: $(sb-weather)"
+sbar+="$SEPARATOR"
+sbar+="UP: $(sb-uptime)"
+sbar+="$SEPARATOR"
+sbar+="CPU: $(sb-cpu)"
+sbar+="$SEPARATOR"
+sbar+="MEM: $(sb-memory)"
+sbar+="$SEPARATOR"
+sbar+="VOL: $(sb-volume)"
+sbar+="$SEPARATOR"
+sbar+="$(sb-clock)"
+
+echo $sbar

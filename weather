@@ -1,0 +1,34 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: Weather (weather)
+# Description	: Simple script that uses openweathermap.org API_KEY to scrap current weather
+# Args		: 
+# Environment	: $OPEN_WEATHER_KEY - api key to make this work
+#            	: $OPEN_WEATHER_LAT - lattitude  of the place you check weather for
+#            	: $OPEN_WEATHER_LON - longtitude of the place you check weather for
+# Dependencies	: cat, curl, echo, sleep
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+# latitude and longtitude scraped from there, replace {city} param to respective city:
+#http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid=$OPEN_WEATHER_KEY
+
+[ -z "$OPEN_WEATHER_KEY" -o -z "$OPEN_WEATHER_LAT" -o -z "$OPEN_WEATHER_LON" ] &&\
+    echo "missing api key, latitude or longtitude env var" &&\
+    exit 1
+
+URL="https://api.openweathermap.org/data/2.5/weather?units=metric&lat=$OPEN_WEATHER_LAT&lon=$OPEN_WEATHER_LON&appid=$OPEN_WEATHER_KEY"
+
+call_api() {
+    curl -s $URL | jq '.main.temp' > /tmp/current_weather
+}
+
+# call api if no cached weather
+[ ! -f /tmp/current_weather ] && call_api
+
+# or older than 3 hours
+[ ! -z $(find /tmp -mmin +180 2>/dev/null | grep current_weather) ] && call_api
+
+cat /tmp/current_weather
