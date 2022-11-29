@@ -26,9 +26,11 @@ call_api() {
 }
 
 # call api if no cached weather
-[ ! -f /tmp/current_weather ] && call_api
+[ ! -f /tmp/current_weather ] &&\
+    call_api
 
 # or older than 3 hours
-[ ! -z $(find /tmp -mmin +180 2>/dev/null | grep current_weather) ] && call_api
+[ -z "$(find /tmp -mmin -180 2>/dev/null | grep /tmp/current_weather)" ] &&\
+    call_api
 
 cat /tmp/current_weather
