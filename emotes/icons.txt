@@ -1,5 +1,6 @@
 ✓ check tick
 € euro currency
+° degree celsius farenheit
 ┌ box corner top left
 └ box corner bottom left
 ┐ box corner top right
