@@ -17,11 +17,12 @@ dirname="$HOME/Pictures/screenshots"
 mkdir -p "$dirname"
 
 # i.e. 2022-12-31T00:01:59.png
-filename+="$(date --iso-8601=seconds).png"
+filename+="$(date --iso-8601=seconds).bmp"
 
-maim $@ |\
-	convert - \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -layers merge +repage - |\
-	tee $dirname/$filename |\
-	xclip -sel clipboard -target image/png
+flags="$@ --color 0,0,0,0.3 --highlight -o $dirname/$filename"
+
+maim $flags
+
+cat $dirname/$filename | xclip -sel clipboard -target image/png
 
 notify-send 'Screenshot copied!' "Saved as:\n'$filename' at: \n '$dirname' folder"
