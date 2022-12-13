@@ -16,5 +16,5 @@ new_csum=$(sha1sum $(which dwm))
 while true; do
     [ "$csum" != "$new_csum" ] && csum=$new_csum; dwm || exit 0
     new_csum=$(sha1sum $(which dwm))
-    sleep 5
+    sleep 5s
 done

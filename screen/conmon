@@ -12,7 +12,9 @@
 defaultOutput="eDP1"
 [ ! -z $DEFAULT_OUTPUT ] && defaultOutput=$DEFAULT_OUTPUT 
 
-outputs=$(xrandr | grep -v $defaultOutput | grep -e [^s]connected | awk '{print $1}')
+outputs=$(xrandr | grep -v "$defaultOutput" | grep -e [^s]connected | awk '{print $1}')
+
+echo $defaultOutput $outputs
 
 for output in $outputs; do
 	xrandr --output $output --auto --right-of $defaultOutput
