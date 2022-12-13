@@ -19,10 +19,12 @@
     echo "missing api key, latitude or longtitude env var" &&\
     exit 1
 
-URL="https://api.openweathermap.org/data/2.5/weather?units=metric&lat=$OPEN_WEATHER_LAT&lon=$OPEN_WEATHER_LON&appid=$OPEN_WEATHER_KEY"
 
 call_api() {
-    curl -s $URL | jq '.main.temp' > /tmp/current_weather
+    URL="https://api.openweathermap.org/data/2.5/weather?units=metric&lat=$OPEN_WEATHER_LAT&lon=$OPEN_WEATHER_LON&appid=$OPEN_WEATHER_KEY"
+    weather=$(curl -s $URL | jq '.main.temp')
+    [ -z "$weather" ] && echo "no results" && exit 1
+    echo "$weather" > /tmp/current_weather
 }
 
 # call api if no cached weather
@@ -30,7 +32,9 @@ call_api() {
     call_api
 
 # or older than 3 hours
-[ -z "$(find /tmp -mmin -180 2>/dev/null | grep /tmp/current_weather)" ] &&\
+[ ! -n "$(find /tmp -mmin -180 2>/dev/null | grep /tmp/current_weather)" ] &&\
     call_api
+
+[ ! -s /tmp/current_weather ] && call_api
 
 cat /tmp/current_weather
