@@ -25,4 +25,4 @@ maim $flags
 
 cat $dirname/$filename | xclip -sel clipboard -target image/png
 
-notify-send 'Screenshot copied!' "Saved as:\n'$filename' at: \n '$dirname' folder"
+notify 'Screenshot copied!' "Saved as:\n'$filename' at: \n '$dirname' folder"

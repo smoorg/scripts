@@ -27,16 +27,18 @@ export PATH=$PATH:/usr/local/games:/usr/local/bin:$HOME/.local/share/application
 
 Most of my scripts use: 
 
-- `dmenu` or `fzf` for presenting options (I think the only one using `fzf` is `kcs` right now)
-- gnutils such as `gawk`, `grep`, `tr`, `tail`, `head`, `echo`, `read` 
-- monitor scripts are useful only in X11 so `xrandr` is required
+- `dmenu` for listing options 
+- `fzf` although I think the only one using `fzf` is `kcs` right now and possibly I'll move to dmenu as well in future
+- `gnutils` such as `gawk`, `grep`, `tr`, `tail`, `head`, `echo`, `read`, `file`, `find`
+- `xrandr` for monitor scripts
 - `xinput` used in `touchtog`
 - `dunst` or another program for sending notifications via `notify-send`
 - either `amixer` or `pactl` depending on what you're using for sound
 - `mpc` and `ncmpcpp` for playing music
 - `sxiv` to pick a wallpaper 
 - `xrandr` to manage monitors and resolutions
-- `ffmpeg`, `slop` and `maim` to record screen
+- `ffmpeg` for webcam preview (`webcam` script) and screen recording (`record` script)
+- `maim` for screenshots and screen area picking for `record`
 
 ## Variables
 
@@ -57,6 +59,8 @@ I try to group scripts into folders for maintenance but they also have functiona
 	- [hibernate](https://github.com/smoorg/scripts/blob/main/aliases/hibernate) - systemd hibernation call
 	- [music](https://github.com/smoorg/scripts/blob/main/aliases/music) - runs mpc update and ncmpcpp 
 	- [pdf](https://github.com/smoorg/scripts/blob/main/aliases/pdf) - application for pdf, usually xreader
+- cron
+        - [notify](https://github.com/smoorg/scripts/blob/main/cron/notify) - simple wrapper for notify-send with timeout of 10s, safe to use with cronjobs
 - sound - everything related to sound management, volume, mute status, switching sinks and so on
 	- [currsink](https://github.com/smoorg/scripts/blob/main/sound/currsink) - returns default sink
 	- [mute](https://github.com/smoorg/scripts/blob/main/sound/mute) - toggles mute status for sinkid or sink name

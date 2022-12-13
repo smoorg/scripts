@@ -9,5 +9,5 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-[ -n "$(pgrep -x redshift)" ] && notify-send "Night mode stopped" && pkill redshift && redshift -t 6500 && exit 0 ||\
+[ -n "$(pgrep -x redshift)" ] && notify "Night mode stopped" && pkill redshift && redshift -t 6500 && exit 0 ||\
 	redshift -l 55.7:12.6 -t 5700:3600 -g 0.8 -m randr -v > /dev/null 2>&1 &
