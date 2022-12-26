@@ -5,30 +5,37 @@
 # Description	: A keepassxc integration with rclone for database.
 # 		  Merges the database and sends it to the cloud.
 # Args          :
-# Dependencies 	: mkdir, cp read, gawk, keepassxc-cli, rclone, fzf
+# Dependencies 	: mkdir, cp, read, gawk, keepassxc-cli, rclone, fzf
 # Author       	: Mateusz Reszka
 # Email         : mateusz@mateuszreszka.xyz
 ###################################################################
 
 #a directory where local files (database, keepass key) are stored
 find_main_folder="$HOME/KeePass"
+[ -d $KEEPASS_DIR ] && $find_main_folder=$KEEPASS_DIR
+[ ! -d $find_main_folder ] &&\
+    echo "no $HOME/KeePass nor \$KEEPASS_DIR set up" &&\
+    exit 1
 
 # directory where downloaded kdbx files will be stored
 tmp_copy_dir="/tmp"
 
 # directory for backups
 backup_dir="$HOME/.local/share/kcs/backups"
+[ ! -d "$backup_dir" ] &&\
+    echo "backup dir '$backup_dir' created" &&\
+    mkdir -p $backup_dir
+
 backup_file_name="$(date +%F_%H:%M:%S).kdbx" # i.e. 2020-02-02_13:14:59.kdbx
 backup_full_dir="$backup_dir/$backup_file_name"
-
-[ -d "$backup_dir" ] || echo "created" mkdir -p $backup_dir
 
 # list remotes and pick one
 remote=$(rclone listremotes | sed 's/://g' | fzf --header='Provide remote name')
 
 # list remote kdbx files and pick one 
-remote_file=$(rclone lsl "onedrive:" --include "*.kdbx" --max-depth 2 | awk '{print $4}' |\
-	fzf --header='Provide remote keepass db directory')
+remote_file=$(rclone lsl "onedrive:" --include "*.kdbx" --max-depth 2 |\
+    awk '{print $4}' |\
+    fzf --header='Provide remote keepass db directory')
 
 # list local kdbx files and pick one
 local_file=$(find $find_main_folder -iname "*.kdbx" |\
