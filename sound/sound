@@ -13,7 +13,7 @@ current_sink=$(currsink)
 curr_volume=$(volume)
 curr_volume=${curr_volume%%%}
 
-if [[ ! -z "$(pgrep -x pulseaudio)" && -z "$(pgrep -x pipewire-pulse)" ]]; then
+if [[ ! -z "$(pgrep -x pulseaudio)" || ! -z "$(pgrep -x pipewire-pulse)" ]]; then
 	up() {
 		[ "$curr_volume" -gt 99 ] && exit 0;
 		pactl set-sink-volume "$current_sink" +5%;
@@ -29,4 +29,4 @@ case "$1" in
 	down) down ;;
 esac >/dev/null
 
-notify "Sound $1" "Sound $1 by 5% to $curr_volume"
+notify-send "Sound $1" "Sound $1 by 5% to $curr_volume"
