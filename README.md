@@ -82,9 +82,10 @@ I try to group scripts into folders for maintenance but they also have functiona
 - pacman - scripts related to pacman
 	- [pacinst](https://github.com/smoorg/scripts/blob/main/pacman/pacinst) - copied from archlinux wiki; fzf based application installer
 	- [pacupd](https://github.com/smoorg/scripts/blob/main/pacman/pacupd) - pacman update script which remembers to install archlinux-keyring first for me
+- keepassxc - scripts related to keepassxc
+	- [kcs](https://github.com/smoorg/scripts/blob/main/keepassxc/kcs) - Keepass + rclone sync to update/merge database.
 - [statusbar](https://github.com/smoorg/scripts/blob/main/statusbar) - dwm bar status bar scripts to present cpu and ram usage, volume, date and time, nothing fancy there
 - [emotes](https://github.com/smoorg/scripts/blob/main/emotes) - dumb script to present emotes and its tags and copy over needed one to the `xclip`
-- [kcs](https://github.com/smoorg/scripts/blob/main/kcs) - Keepass + rclone sync to update/merge database.
 - [marktime](https://github.com/smoorg/scripts/blob/main/marktime) - sets timestamp and adds it to a file. Then substracts it from previous one to count time period. Can be used to track time
 - [record](https://github.com/smoorg/scripts/blob/main/record) - records screen area
 - [recordws](https://github.com/smoorg/scripts/blob/main/recordws) - records whole screen in QHD resolution, can be modified to fHD easily
