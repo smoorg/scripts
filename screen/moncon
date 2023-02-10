@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ###################################################################
-# Script Name	: Connect monitor (conmon)
+# Script Name	: Connect monitor (moncon)
 # Description	: Connets a new monitor to the right of existing one.
 # Args		:
 # Dependencies	: gawk, grep, xrandr, setwall
