@@ -6,16 +6,19 @@
 # 		  Merges the database and sends it to the cloud.
 # Args          :
 # Dependencies 	: mkdir, cp, read, gawk, keepassxc-cli, rclone, fzf
+# Variables     : $KEEPASS_DIR - place where you store your local keepass db
 # Author       	: Mateusz Reszka
 # Email         : mateusz@mateuszreszka.xyz
 ###################################################################
 
-#a directory where local files (database, keepass key) are stored
-find_main_folder="$HOME/KeePass"
-[ -d $KEEPASS_DIR ] && $find_main_folder=$KEEPASS_DIR
-[ ! -d $find_main_folder ] &&\
-    echo "no $HOME/KeePass nor \$KEEPASS_DIR set up" &&\
+# throw error if $KEEPASS_DIR not defined
+[ -z $KEEPASS_DIR ] ||\
+    [ "$KEEPASS_DIR" == "" ] ||\
+    [ ! -d $KEEPASS_DIR ] &&\
+    echo "set up \$KEEPASS_DIR before running the script" &&\
     exit 1
+
+find_main_folder=$KEEPASS_DIR
 
 # directory where downloaded kdbx files will be stored
 tmp_copy_dir="/tmp"
