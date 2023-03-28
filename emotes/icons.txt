@@ -1,6 +1,9 @@
 ✓ check tick
 € euro currency
 ° degree celsius farenheit
+™ trademark
+® registered trademark
+© copyright
 ┌ box corner top left
 └ box corner bottom left
 ┐ box corner top right
