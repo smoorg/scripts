@@ -1,0 +1,92 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: Packages to install (toinstall)
+# Description	: Installs all the packages in short script
+# Args		:	
+# Dependencies	: sudo, pacman, xrandr
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+function prompt() {
+    printf "\n"
+    read -n 1 -p "$1: " yn
+    answer=$(tr "[:upper:]" "[:lower:]" <<< $yn)
+    [ "$answer" = "y" ] && exit 0
+    [ "$answer" = "n" ] && exit 1
+    
+    echo "Invalid answer, 'y' or 'n' expected"
+    exit 2
+}
+
+packages="base"
+
+# just basic internet related packages
+packages+=" curl networkmanager networkmanager-openvpn openssh wget"
+
+## I always install these to make my config dwm work
+packages+=" alacritty cronie dunst feh"
+
+## Required by my scripts
+packages+=" fzf maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass xclip xcompmgr xdotool xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey"
+
+# not mandatory but are my personal pick
+( prompt "install personal pick? y/n" ) && packages+=" bash-completion firefox bc imagemagick keepassxc lynx man-db man-pages neovim newsboat zip yay yt-dlp rg"
+
+( prompt "install mpd? y/n" ) && packages+=" mpc mpd"  
+
+( prompt "install communication (zoom, slack, element etc.)? y/n" ) && packages+=" zoom slack-desktop element-desktop"
+
+# Work related 
+
+    # Important regardless of development type
+    ( prompt "install dev stuff? y/n" ) && packages+=" git docker docker-compose github-cli mdp"
+
+    # Javascript / Typescript
+    ( prompt "install ts/js development environment? y/n" ) && packages+=" npm nodejs-lts-gallium yarn"
+
+    # Go
+    ( prompt "install go? y/n" ) && packages+=" go"
+
+# Fonts
+( prompt "install fonts? y/n" ) && packages+=" gnu-free-fonts noto-fonts noto-fonts-cjk otf-font-awesome-4 otf-font-awesome-5-free ttc-iosevka ttf-dejavu ttf-font-awesome ttf-jetbrains-mono ttf-liberation ttf-nerd-fonts-symbols-2048-em xorg-font-util"
+
+# Others
+
+# These are used by me depending on the type of things I do on certain machine, that group is optional and covers games, DAWs, and other stuff.
+
+# packages+=" ardour nethack newsboat pavucontrol wkhtmltopdf modemmanager"
+
+# For `askpass` script we need `dmenu` with password flag, hence my build. You can skip it and install `dmenu` from somewhere else if you won't use it.
+if ( prompt "install custom dmenu? y/n" ); then
+    gitcmd="git clone git@github.com:smoorg/dmenu"
+    [ -n "$REPOS" ] && gitcmd+=" $REPOS/dmenu"
+    $($gitcmd)
+    cd dmenu
+    make clean install
+fi
+
+
+# Laptop specific packages, currently just wwan and wifi support 
+# - iwd is native linux api; wpa_supplicant replacement
+# - modem manager is a cli to manage connections to mobile internet using SIM card
+
+( prompt "install laptop specific? y/n" ) && packages+=" iwd modemmanager"
+
+printf "\n"
+
+# Add a sudo command if executing user is not a root or uid 0 account (sometimes root can be named differently). 
+# When user is not a root account, use sudo when installed, otherwise doas.
+# if [ whoami != "root" ] && [ ! $(id -u) -eq 0 ]; then
+#     # add sudo when installed
+#     ( type -p sudo >&/dev/null ) && cmd="sudo " &&\
+#         # use sudo askpass flag if any
+#         [ -n "$SUDO_ASKPASS" ] && cmd+="-A "
+#
+#     # use doas if no sudo
+#     ( ! type -p sudo >&/dev/null ) && ( type -p doas >&/dev/null ) && cmd="doas "
+# fi
+
+sudo pacman -S $packages
