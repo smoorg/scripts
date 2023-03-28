@@ -5,6 +5,7 @@
 # Description	: Sort of alias. Triggers mpc database update and runs ncmpcpp.
 # Args		:
 # Dependencies	: mpc, ncmpcpp
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

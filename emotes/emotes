@@ -5,6 +5,7 @@
 # Description	: A dumb way to store icons along with their tags to make them searchable
 # Args		:
 # Dependencies	: dmenu, tr, xdotool 
+# Variables	:
 # Files used	: icons.txt
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz

@@ -5,6 +5,7 @@
 # Description	: Similar to `record` but hardcoded areas.
 # Args		: $1 - filename
 # Dependencies	: ffmpeg 
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

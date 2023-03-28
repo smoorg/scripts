@@ -6,6 +6,7 @@
 #		  path, if picked. Use as alias with cd or `$ cd $(repocd)`
 # Args		:
 # Dependencies	: find, sed, dmenu
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

@@ -7,6 +7,7 @@
 #		  Script `subdate` calculates diff between timestamps.
 # Args		:
 # Dependencies	: cat, tail, gawk, subdate
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

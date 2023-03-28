@@ -5,6 +5,7 @@
 # Description	: Manages volume, based on what process is running (alsa, pulse or pipewire).
 # Args		:
 # Dependencies	: pactl, pgrep, amixer, dunst, currsink, volume
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

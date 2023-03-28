@@ -5,6 +5,7 @@
 # Description	: Toggles mute to default sink.
 # Args		:
 # Dependencies	: gawk, pactl
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

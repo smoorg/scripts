@@ -5,6 +5,7 @@
 # Description	: A simple script to pick scanner and scan picture.
 # Args		:
 # Dependencies	: dmenu, scanimage
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

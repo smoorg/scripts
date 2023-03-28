@@ -5,6 +5,7 @@
 # Description	: Provides info about current volume level on default sink.
 # Args		:
 # Dependencies	: amixer, gawk, head, pactl, pgrep, tr, currsink
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

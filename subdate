@@ -5,6 +5,7 @@
 # Description	: Substrings dates and echoes difference in date format. 
 # Args		: $1 - date1, $2 - date2
 # Dependencies	: date, bc
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

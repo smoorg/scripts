@@ -5,6 +5,7 @@
 # Description	: Returns default sink.
 # Args		:
 # Dependencies	: pactl
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

@@ -4,10 +4,10 @@
 # Script Name	: Weather (weather)
 # Description	: Simple script that uses openweathermap.org API_KEY to scrap current weather
 # Args		: 
-# Environment	: $OPEN_WEATHER_KEY - api key to make this work
+# Dependencies	: cat, curl, echo, find, jq, sleep
+# Variables	: $OPEN_WEATHER_KEY - api key to make this work
 #            	: $OPEN_WEATHER_LAT - lattitude  of the place you check weather for
 #            	: $OPEN_WEATHER_LON - longtitude of the place you check weather for
-# Dependencies	: cat, curl, echo, find, jq, sleep
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

@@ -6,6 +6,7 @@
 #		  Makes it easier to pick an SSH key and add it to ssh-agent
 # Args		:
 # Dependencies	: dmenu, ssh, ssh-agent, ssh-add
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

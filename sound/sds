@@ -5,6 +5,7 @@
 # Description	: Sets default sink to the provided one.
 # Args		: $1 - sinkid or name
 # Dependencies	: pactl, switchsink
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

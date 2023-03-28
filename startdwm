@@ -5,6 +5,7 @@
 # Description	: Checks if dwm has ben rebuilded lately and replaces existing instance with a new binary.
 # Args		:	
 # Dependencies	: sha1sum, which, dwm, sleep
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

@@ -5,6 +5,7 @@
 # Description	: Uses mpv to show webcam.
 # Args		: $1 - video number
 # Dependencies	: mpv, v4l2
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

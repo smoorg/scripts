@@ -5,6 +5,7 @@
 # Description	: Redshift alias that stops redshift if run twice.
 # Args		:
 # Dependencies	: redshift
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

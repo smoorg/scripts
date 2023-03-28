@@ -5,6 +5,7 @@
 # Description	: Simple script to manage monitor brightness.
 # Args		: $1 - number of percentages decrease/increase brightness, i.e. "5" or "-10"
 # Dependencies	: xbacklight, cut, dunst
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

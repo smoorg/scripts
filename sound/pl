@@ -5,6 +5,7 @@
 # Description	: Lists sinks.
 # Args		:
 # Dependencies	: pactl
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

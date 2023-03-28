@@ -5,6 +5,7 @@
 # Description	: Connets a new monitor to the right of existing one.
 # Args		:
 # Dependencies	: gawk, grep, xrandr, setwall
+# Variables	: $DEFAULT_OUTPUT
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

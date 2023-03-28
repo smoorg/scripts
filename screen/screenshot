@@ -5,6 +5,7 @@
 # Description	: Captures screen and saves it to clipboard
 # Args		: -s: prints whole screen instead of area
 # Dependencies	: convert, dunst, maim, mkdir, tee, xclip
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

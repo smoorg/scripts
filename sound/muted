@@ -5,6 +5,7 @@
 # Description	: Checks whether default sink is muted or not. Returns 0 or 1.
 # Args		:
 # Dependencies	: pactl, tail, tr
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

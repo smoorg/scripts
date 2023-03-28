@@ -7,11 +7,13 @@
 #		  You have to change $touch_device to your own.
 # Args		:
 # Dependencies	: xinput, gawk, grep
+# Variables	: $TOUCH_DEVICE
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 touch_device='ALP0016'
+[ -n "$TOUCH_DEVICE" ] && touch_device=$TOUCH_DEVICE
 
 deviceid=$(xinput list | grep $touch_device | awk -F'[=[]' '{print $2}')
 prop=$(xinput list-props $deviceid | grep Enabled | awk -F'[()]' '{print $2}')

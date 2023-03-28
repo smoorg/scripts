@@ -6,6 +6,7 @@
 #		  and call `setwall`. If no file provided sxiv is opened to pick one.
 # Args		: a file directory
 # Dependencies	: cp, xargs, sxiv, setwall
+# Variables	: $WALLPAPERS_DIR, $WALLPAPER_DIR
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

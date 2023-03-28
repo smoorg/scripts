@@ -6,6 +6,7 @@
 #		  of .flac file with it's .cue description.
 # Args		:
 # Dependencies	: shntool
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

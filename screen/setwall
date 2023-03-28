@@ -6,6 +6,7 @@
 #		  and call `setwall`. If no file provided sxiv is opened to pick one.
 # Args		: $1 - (optional) wallpaper directory
 # Dependencies	: feh
+# Variables	: $WALLPAPER_DIR
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

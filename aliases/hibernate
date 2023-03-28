@@ -5,6 +5,7 @@
 # Description	: Dumb alias to systemctl suspend
 # Args		:
 # Dependencies	: systemctl
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################

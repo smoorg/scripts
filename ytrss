@@ -5,6 +5,7 @@
 # Description	: Provides RSS to youtube videos based on the channel/user/playlist.
 # Args		:
 # Dependencies	: gawk
+# Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
