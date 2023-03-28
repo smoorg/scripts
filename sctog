@@ -1,0 +1,21 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: screenkey toggle (sctog)
+# Description	: Simple script to run or kill screenkey process.
+# Args		:
+# Dependencies	: screenkey
+# Variables     :
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+# check if screenkey binary exists in the system
+[ -z "$(type -p /usr/bin/screenkey)" ] && echo "screenkey not installed; exiting" exit 1
+
+# kill it if screenkey is already running
+[ -n "$(pgrep -x screenkey)" ] && pkill screenkey && exit 0
+
+# run screenkey instance
+screenkey &
+
