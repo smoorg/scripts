@@ -2,14 +2,14 @@
 
 ###################################################################
 # Script Name	: Ask for password (askpass)
-# Description	: Simple way to ask for password from X session. Can be used in various ways, i.e. with `sudo -A`.
+# Description	: Simple way to ask for password from X session. Can be used in various ways, i.e. with `sudo -A` or as SSH_ASKPASS app.
 # Args		: $1 - name of the prompt
 # Dependencies	: dmenu (patched with dmenu-password), echo, pgrep
 # Variables	: $SUDO_ASKPASS - pass the script as it's value to use it. Useful to integrate it with sudo when outside of terminal, like in vim.
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
-prompt="Provide sudo password: "
+prompt="Provide password: "
 [ -n "$1" ] && prompt=$1
 
 echo $(dmenu -P -p "$prompt")

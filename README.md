@@ -39,6 +39,7 @@ Most of my scripts use:
 - `xrandr` to manage monitors and resolutions
 - `ffmpeg` for webcam preview (`webcam` script) and screen recording (`record` script)
 - `maim` for screenshots and screen area picking for `record`
+- `screenkey` specificly in `sctog` to start and stop `screenkey` application in the background
 
 ## Variables
 
@@ -84,6 +85,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 	- [pacupd](https://github.com/smoorg/scripts/blob/main/pacman/pacupd) - pacman update script which remembers to install archlinux-keyring first for me
 - keepassxc - scripts related to keepassxc
 	- [kcs](https://github.com/smoorg/scripts/blob/main/keepassxc/kcs) - Keepass + rclone sync to update/merge database.
+- [askpass](https://github.com/smoorg/scripts/blob/main/askpass) - calls dmenu for password, if dmenu has -P flag (patch) it stars the input and sends it forward
 - [statusbar](https://github.com/smoorg/scripts/blob/main/statusbar) - dwm bar status bar scripts to present cpu and ram usage, volume, date and time, nothing fancy there
 - [emotes](https://github.com/smoorg/scripts/blob/main/emotes) - dumb script to present emotes and its tags and copy over needed one to the `xclip`
 - [marktime](https://github.com/smoorg/scripts/blob/main/marktime) - sets timestamp and adds it to a file. Then substracts it from previous one to count time period. Can be used to track time
@@ -91,7 +93,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 - [recordws](https://github.com/smoorg/scripts/blob/main/recordws) - records whole screen in QHD resolution, can be modified to fHD easily
 - [scan](https://github.com/smoorg/scripts/blob/main/scan) - uses plugged in scanner and tries to scan image
 - [splitflac](https://github.com/smoorg/scripts/blob/main/splitflac) - splits flac file into pieces based on cue description
-- [sshadd](https://github.com/smoorg/scripts/blob/main/sshadd) - picks ssh key from dmenu to use with ssh-agent
+- [sshadd](https://github.com/smoorg/scripts/blob/main/sshadd) - picks ssh key from dmenu to use with ssh-agent, asks for password using `askpass` if possible
 - [startdwm](https://github.com/smoorg/scripts/blob/main/startdwm) - while loop that reruns dwm every time it's binary has changed
 - [subdate](https://github.com/smoorg/scripts/blob/main/subdate) - subtracts two dates
 - [touchtog](https://github.com/smoorg/scripts/blob/main/touchtog) - uses `xinput` to toggle provided device
