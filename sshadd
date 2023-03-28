@@ -11,7 +11,19 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
+# pick a key
 KEY=$(ls $HOME/.ssh/ | dmenu -l 30 -p "Pick key to add to ssh agent:")
 
+# exit if key not picked
 [ -z $KEY ] && echo "no key provided, aborting" && exit 1
-ssh-add "$HOME/.ssh/$KEY"
+
+# if dmenu has -P option ask for password through it
+if [ -n "$(man dmenu | grep -- '-P ')" ]; then
+    # trick ssh-add to use `askpass` script which wrapps around dmenu -P
+    DISPLAY=:0
+    SSH_ASKPASS=askpass
+    ssh-add $@ "$HOME/.ssh/$KEY" < /dev/null
+    exit 0
+fi
+
+ssh-add $@ "$HOME/.ssh/$KEY"
