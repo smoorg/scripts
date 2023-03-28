@@ -10,7 +10,7 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-to_move=$(pactl list sink-inputs short | awk -F ' ' '{print $1}')
+to_move=$(pactl list sink-inputs short | awk -F' ' '{print $2}')
 def_sink=$(currsink)
 
 for i in $to_move; do

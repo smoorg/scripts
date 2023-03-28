@@ -10,5 +10,5 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-pactl set-default-sink $1
+pactl set-default-source $@
 switchsink
