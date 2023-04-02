@@ -1,3 +1,13 @@
 #!/bin/sh
 
-free --si -h | grep -E "Pam|Mem" | awk '{print $3"/"$2}'
+###################################################################
+# Script Name	: Statusbar Memory (sb-memory)
+# Description	: One liner to present used / all RAM memory.
+# Args		:
+# Dependencies	: free, awk
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+free --si -h | awk 'FNR == 2 {print $3"/"$2}'
