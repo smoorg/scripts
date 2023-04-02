@@ -11,9 +11,9 @@
 ###################################################################
 
 if [[ -n "$(pgrep -x pulseaudio)" || -n "$(pgrep -x pipewire-pulse)" ]]; then
-    curr_volume=$(pactl get-sink-volume $(currsink) | awk -F'/' '{print $2}' | tr -d ' ')
+    curr_volume=$(pactl get-sink-volume $(currsink) | awk 'FNR == 1 {print $5}')
 else
-	curr_volume=$(amixer sget Master | grep % | awk -F"[][]" '{print $2}' | head -n 1)
+    curr_volume=$(amixer sget Master | awk '/%/ {print $5}' | tr -d [] | head -n 1)
 fi
 
 echo "$curr_volume"

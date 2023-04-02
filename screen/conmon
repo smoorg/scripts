@@ -10,13 +10,16 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
+# this is standard in laptops, that monitor will be connected all the time
 defaultOutput="eDP1"
-[ ! -z $DEFAULT_OUTPUT ] && defaultOutput=$DEFAULT_OUTPUT 
+[ -n $DEFAULT_OUTPUT ] && defaultOutput=$DEFAULT_OUTPUT 
 
-outputs=$(xrandr | grep -v "$defaultOutput" | grep -e [^s]connected | awk '{print $1}')
+# takes all connected outputs but the default one
+outputs=$(xrandr | awk -F='[=[]' -v def="$defaultOutput" '$1 !~ def && / connected/ {print $1}')
 
 echo $defaultOutput $outputs
 
+# puts all connected outputs to right of the default one
 for output in $outputs; do
 	xrandr --output $output --auto --right-of $defaultOutput
 	setwall

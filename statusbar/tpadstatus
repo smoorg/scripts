@@ -1,3 +1,18 @@
 #!/bin/sh
-[ -n "$TOUCHPAD_ID" ] && deviceid=$TOUCHPAD_ID || exit 1
-[[ "$(xinput list-props $deviceid | grep Enabled | awk '{print $4}')" -eq 1 ]] && echo "" || echo ""
+###################################################################
+# Script Name	: Touchpad Status (tpadstatus)
+# Description	: Simple script to print touchpad icon
+# Args		:
+# Dependencies	: xinput, awk
+# Variables	: $TOUCHPAD_ID
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+[ -z "$TOUCHPAD_ID" ] &&\
+    deviceid=$TOUCHPAD_ID &&\
+    echo "no $TOUCHPAD_ID defined" &&\
+    exit 1
+
+[[ "$(xinput list-props $deviceid | awk '/Enabled/ {print $4}')" -eq 1 ]] &&\
+    echo "" || echo ""
