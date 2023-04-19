@@ -3,6 +3,8 @@
 SEPARATOR=" | "
 
 sbar=""
+
+[ $LAPTOP ] && sbar+="BATTERY: $(sb-battery)$SEPARATOR"
 sbar+="TEMP: $(sb-weather)"
 sbar+="$SEPARATOR"
 sbar+="UP: $(sb-uptime)"
