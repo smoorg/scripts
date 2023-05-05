@@ -51,6 +51,11 @@ There are few scripts that expects you to have certain variables to be set in or
 |WALLPAPER_DIR|a file that supposed to be used as your wallpaper i.e. `$HOME/wallpaper.png`|setwall, swapwall|
 |WALLPAPERS_DIR|directory with your wallpapers, i.e. `$HOME/Pictures/wallpapers`|setwall, swapwall|
 |SCREENSHOT_DIR|directory with your screenshots, i.e. `$HOME/Pictures/screenshots`|screenshot|
+|KEEPASS_DIR|directory with your keepass database, i.e. `$HOME/Keepass/`|kcs|
+|DEFAULT_OUTPUT|default output for screen manipulation like change resolution, i.e. DP-4`|conmon|
+|TOUCHPAD_ID|touchpad device id to toggle it off|touchtog, tpadstatus|
+|OPEN_WEATHER_KEY|api key to make weather widget on dwm statusbar work|weather|
+
 
 ## Description
 
