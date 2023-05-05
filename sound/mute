@@ -17,7 +17,5 @@ sinkid=$1
 sinkids=$(pactl list sinks short | awk -F' ' '{print $1}')
 
 [[ "$sinkids" =~ "$sinkid" ]] &&\
-    pactl set-sink-mute $sinkid toggle || echo "sink not found"; exit 2
-
-
-
+    pactl set-sink-mute $sinkid toggle ||\
+    echo "sink not found"; exit 2

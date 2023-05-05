@@ -41,6 +41,3 @@ playlist_rss()
 [ "$has_playlist" = 1 ] && playlist_rss;
 
 echo "$url?$params"
-
-
-

@@ -19,5 +19,3 @@ fi
 selected=$(cat /tmp/cdrepo | dmenu -l 10)
 
 [ -n "$selected" ] && echo $REPOS$selected
-
-
