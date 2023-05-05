@@ -14,7 +14,7 @@ current_sink=$(currsink)
 curr_volume=$(volume)
 curr_volume=${curr_volume%%%}
 
-if [[ -n "$(pgrep -x pulseaudio)" || -n "$(pgrep -x pipewire-pulse)" ]]; then
+if [[ -n "$(pgrep -x pulseaudio)" ]]; then
 	up() {
             [ "$curr_volume" -gt 99 ] && exit 0;
             pactl set-sink-volume "$current_sink" +5%;
