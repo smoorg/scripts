@@ -1,0 +1,16 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: turn off usb pendrive (usboff)
+# Description	: Simple alias to turn off device. I keep forgetting the command.
+# Args		: $1 - device name
+# Dependencies	: udisksctl(udisks2), echo
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+# exit when $1 is empty or not a directory
+[ -z $1 -o ! -d $1 ] && echo 'provide device name i.e. /dev/sda1' && exit 1
+
+udisksctl power-off --block-device $1

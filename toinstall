@@ -30,7 +30,7 @@ packages+=" curl networkmanager networkmanager-openvpn openssh wget"
 packages+=" alacritty cronie dunst feh"
 
 ## Required by my scripts
-packages+=" fzf maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass xclip xcompmgr xdotool xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey"
+packages+=" fzf maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass xclip xcompmgr xdotool xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey udisks2"
 
 ( prompt "install audio rip tools? y/n" ) && packages+=" cdrtools flac"
 

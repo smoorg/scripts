@@ -41,6 +41,7 @@ Most of my scripts use:
 - `ffmpeg` for webcam preview (`webcam` script) and screen recording (`record` script)
 - `maim` for screenshots and screen area picking for `record`
 - `screenkey` specificly in `sctog` to start and stop `screenkey` application in the background
+- `udisks2` to manage usb drives
 
 ## Variables
 
@@ -104,5 +105,6 @@ I try to group scripts into folders for maintenance but they also have functiona
 - [startdwm](https://github.com/smoorg/scripts/blob/main/startdwm) - while loop that reruns dwm every time it's binary has changed
 - [subdate](https://github.com/smoorg/scripts/blob/main/subdate) - subtracts two dates
 - [touchtog](https://github.com/smoorg/scripts/blob/main/touchtog) - uses `xinput` to toggle provided device
+- [usboff](https://github.com/smoorg/scripts/blob/main/usboff) - kosher way of make usb drives off
 - [webcam](https://github.com/smoorg/scripts/blob/main/webcam) - uses `mpv` to present webcam
 - [ytrss](https://github.com/smoorg/scripts/blob/main/ytrss) - generates rss from youtube channel/playlist/user
