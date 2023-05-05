@@ -1,0 +1,25 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: Rip Audio CD (ripaudio)
+# Description	: Simple script to rip wav, add tags and encode it with flac.
+# Args		:
+# Dependencies	: cdda2wav, file, flac, ls, xargs
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+# fallback $CD_DEVICE to /dev/sr0 
+if [ -z "$CD_DEVICE" ]; then 
+    # exit when not a block device
+    [ ! -b /dev/sr0 ] && echo "no sr0 device, set $CD_DEVICE if it has different alias" && exit 1
+
+    CD_DEVICE="/dev/sr0"
+fi
+
+# split audio into wav tracks
+cdda2wav -B -D $CD_DEVICE
+
+# create flac files
+ls audio_*.wav | xargs -I{} flac {}

@@ -27,6 +27,7 @@ export PATH=$PATH:/usr/local/games:/usr/local/bin:$HOME/.local/share/application
 
 Most of my scripts use: 
 
+- `cdda2wav` to rip CD Audio discs into wav files and `flac` to compress them to loseless format
 - `dmenu` for listing options 
 - `fzf` although I think the only one using `fzf` is `kcs` right now and possibly I'll move to dmenu as well in future
 - `gnutils` such as `gawk`, `grep`, `tr`, `tail`, `head`, `echo`, `read`, `file`, `find`
@@ -96,6 +97,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 - [marktime](https://github.com/smoorg/scripts/blob/main/marktime) - sets timestamp and adds it to a file. Then substracts it from previous one to count time period. Can be used to track time
 - [record](https://github.com/smoorg/scripts/blob/main/record) - records screen area
 - [recordws](https://github.com/smoorg/scripts/blob/main/recordws) - records whole screen in QHD resolution, can be modified to fHD easily
+- [ripaudio](https://github.com/smoorg/scripts/blob/main/ripaudio) - rips audio CD to splitted flac tracks
 - [scan](https://github.com/smoorg/scripts/blob/main/scan) - uses plugged in scanner and tries to scan image
 - [splitflac](https://github.com/smoorg/scripts/blob/main/splitflac) - splits flac file into pieces based on cue description
 - [sshadd](https://github.com/smoorg/scripts/blob/main/sshadd) - picks ssh key from dmenu to use with ssh-agent, asks for password using `askpass` if possible
