@@ -4,7 +4,7 @@
 # Script Name	: Rip Audio CD (ripaudio)
 # Description	: Simple script to rip wav, add tags and encode it with flac.
 # Args		:
-# Dependencies	: cdda2wav, file, flac, ls, xargs
+# Dependencies	: cdda2wav, flac, ls, xargs
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
