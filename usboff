@@ -11,6 +11,6 @@
 ###################################################################
 
 # exit when $1 is empty or not a directory
-[ -z $1 -o ! -d $1 ] && echo 'provide device name i.e. /dev/sda1' && exit 1
+[ -z $1 -o ! -b $1 ] && echo 'provide device name i.e. /dev/sda1' && exit 1
 
 udisksctl power-off --block-device $1
