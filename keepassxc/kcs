@@ -11,6 +11,8 @@
 # Email         : mateusz@mateuszreszka.xyz
 ###################################################################
 
+set -e
+
 # throw error if $KEEPASS_DIR not defined
 [ -z $KEEPASS_DIR ] ||\
     [ "$KEEPASS_DIR" == "" ] ||\
@@ -44,33 +46,34 @@ remote_file=$(rclone lsl "onedrive:" --include "*.kdbx" --max-depth 2 |\
 local_file=$(find $find_main_folder -iname "*.kdbx" |\
 	fzf --header="Pick which local keepass directory")
 
-read -n 1 -p "Do you want to merge it? If not it will simply replace cloud's version with your local copy. y/n (default:y)" merge
+read -n 1 -r -p "Do you want to merge it? If not it will simply replace cloud's version with your local copy. y/n (default:y)"$'\n' merge
+printf "\n"
 
 if [ "$merge" = y ]; then
 
-  echo "download"
+  printf "Downloading...\n"
   # downloads the file to tmp dir
   rclone copy -v "$remote:$remote_file" "$tmp_copy_dir"
 
-  echo "download finished"
+  printf "Download Finished!\n"
 
-  read -n 1 -p 'Do you want to backup current db? y/n (default: n)' yn
-  echo
+  read -n 1 -p "Do you want to backup current db? y/n (default: n)"$'\n' yn
+  printf "\n"
 
   # create backup directory if does not exist; -p for recursive folder creation
   if [ "$yn" = y ]; then
   	[ ! -d "$backup_dir" ] &&\
   		mkdir -p "$backup_dir" &&\
-  		echo "backup directory created: $backup_dir"
+  		printf "backup directory created: %s\n" $backup_dir
 
     cp "$local_file" "$backup_full_dir"
-  	echo "backup file created at $backup_full_dir"
+  	printf "backup file created at %s\n" $backup_full_dir
   fi
   
-  read -n 1 -p 'Do you want to use key file? y/n (default: n)' has_key
-  echo
+  read -n 1 -p "Do you want to use key file? y/n (default: n)"$'\n' has_key
+  printf "\n"
 
-  echo "Merging..."
+  printf "Merging...\n"
 
   if [ "$has_key" = y ]; then
   	key=$(find $find_main_folder | fzf --header="Provide a key file") &&\
@@ -79,11 +82,11 @@ if [ "$merge" = y ]; then
   	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials
   fi
 
-  echo "Merge done!"
+  printf "Merge done!\n"
 fi
 
-echo "Uploading..."
+printf "Uploading...\n"
 # uploads merged database to cloud
 rclone copy -v "$local_file" "$remote:"
 
-echo "Uploading done!"
+printf "Uploading done!\n"
