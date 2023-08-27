@@ -30,14 +30,15 @@ packages+=" curl networkmanager networkmanager-openvpn openssh wget"
 packages+=" alacritty cronie dunst feh"
 
 ## Required by my scripts
-packages+=" fzf maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass xclip xcompmgr xdotool xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey udisks2"
+packages+=" fzf ffmpeg maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass xclip xcompmgr xdotool xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey udisks2 screenkey"
 
 ( prompt "install audio rip tools? y/n" ) && packages+=" cdrtools flac"
 
 # not mandatory but are my personal pick
 ( prompt "install personal pick? y/n" ) && packages+=" bash-completion firefox bc imagemagick keepassxc lynx man-db man-pages neovim newsboat zip yay yt-dlp rg"
 
-( prompt "install mpd? y/n" ) && packages+=" mpc mpd"  
+# music play
+( prompt "install mpd? y/n" ) && packages+=" mpc mpd ncmpcpp"  
 
 ( prompt "install communication (zoom, slack, element etc.)? y/n" ) && packages+=" zoom slack-desktop element-desktop"
 
