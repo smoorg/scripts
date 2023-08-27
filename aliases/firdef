@@ -1,0 +1,14 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: Firefox default profile (firdef)
+# Description	: Used as quick access to firefox with a default profile.
+# Args		:
+# Dependencies	: firefox
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+
+firefox -P default

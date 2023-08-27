@@ -67,6 +67,14 @@ I try to group scripts into folders for maintenance but they also have functiona
 	- [hibernate](https://github.com/smoorg/scripts/blob/main/aliases/hibernate) - systemd hibernation call
 	- [music](https://github.com/smoorg/scripts/blob/main/aliases/music) - runs mpc update and ncmpcpp 
 	- [pdf](https://github.com/smoorg/scripts/blob/main/aliases/pdf) - application for pdf, usually xreader
+    - [firdef](https://github.com/smoorg/scripts/blob/main/aliases/firdef) - firefox default profile
+- capture
+    - [record](https://github.com/smoorg/scripts/blob/main/capture/record) - records screen area
+    - [recordws](https://github.com/smoorg/scripts/blob/main/capture/recordws) - records whole screen in QHD resolution, can be modified to fHD easily
+    - [webcam](https://github.com/smoorg/scripts/blob/main/capture/webcam) - uses `mpv` to present webcam
+- cd
+    - [ripaudio](https://github.com/smoorg/scripts/blob/main/cd/ripaudio) - rips audio CD to splitted flac tracks
+    - [splitflac](https://github.com/smoorg/scripts/blob/main/cd/splitflac) - splits flac file into pieces based on cue description
 - cron
         - [notify](https://github.com/smoorg/scripts/blob/main/cron/notify) - simple wrapper for notify-send with timeout of 10s, safe to use with cronjobs
 - sound - everything related to sound management, volume, mute status, switching sinks and so on
@@ -96,15 +104,10 @@ I try to group scripts into folders for maintenance but they also have functiona
 - [statusbar](https://github.com/smoorg/scripts/blob/main/statusbar) - dwm bar status bar scripts to present cpu and ram usage, volume, date and time, nothing fancy there
 - [emotes](https://github.com/smoorg/scripts/blob/main/emotes) - dumb script to present emotes and its tags and copy over needed one to the `xclip`
 - [marktime](https://github.com/smoorg/scripts/blob/main/marktime) - sets timestamp and adds it to a file. Then substracts it from previous one to count time period. Can be used to track time
-- [record](https://github.com/smoorg/scripts/blob/main/record) - records screen area
-- [recordws](https://github.com/smoorg/scripts/blob/main/recordws) - records whole screen in QHD resolution, can be modified to fHD easily
-- [ripaudio](https://github.com/smoorg/scripts/blob/main/ripaudio) - rips audio CD to splitted flac tracks
 - [scan](https://github.com/smoorg/scripts/blob/main/scan) - uses plugged in scanner and tries to scan image
-- [splitflac](https://github.com/smoorg/scripts/blob/main/splitflac) - splits flac file into pieces based on cue description
 - [sshadd](https://github.com/smoorg/scripts/blob/main/sshadd) - picks ssh key from dmenu to use with ssh-agent, asks for password using `askpass` if possible
 - [startdwm](https://github.com/smoorg/scripts/blob/main/startdwm) - while loop that reruns dwm every time it's binary has changed
 - [subdate](https://github.com/smoorg/scripts/blob/main/subdate) - subtracts two dates
 - [touchtog](https://github.com/smoorg/scripts/blob/main/touchtog) - uses `xinput` to toggle provided device
 - [usboff](https://github.com/smoorg/scripts/blob/main/usboff) - kosher way of make usb drives off
-- [webcam](https://github.com/smoorg/scripts/blob/main/webcam) - uses `mpv` to present webcam
 - [ytrss](https://github.com/smoorg/scripts/blob/main/ytrss) - generates rss from youtube channel/playlist/user
