@@ -75,6 +75,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 - cd
     - [ripaudio](https://github.com/smoorg/scripts/blob/main/cd/ripaudio) - rips audio CD to splitted flac tracks
     - [splitflac](https://github.com/smoorg/scripts/blob/main/cd/splitflac) - splits flac file into pieces based on cue description
+    - [inftags](https://github.com/smoorg/scripts/blob/main/cd/inftags) - parses .inf cddb tags to id3v2 format to append it to audio file
 - cron
         - [notify](https://github.com/smoorg/scripts/blob/main/cron/notify) - simple wrapper for notify-send with timeout of 10s, safe to use with cronjobs
 - sound - everything related to sound management, volume, mute status, switching sinks and so on

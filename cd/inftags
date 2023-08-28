@@ -1,0 +1,59 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: Info tags extractor (inftags)
+# Description	: Extractor of cddb tags out of .inf file using id3v2.
+# Args		:
+# Dependencies	: id3v2
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+audio_file=$1
+info_file=$2
+
+[ ! -f $audio_file ] && echo "error: first param supposed to be an audio file" && exit 1
+[ ! -f $info_file ] && echo "error: 2nd param supposed to be a .info text" && exit 1
+
+# asserts compare file mime to its regex
+expect_mime ()
+{
+    regex=$1
+    file=$2
+    mimetype=$(file --mime-type -b $file)
+
+    res=$(expr $mimetype : $regex)
+    [ $? -gt 0 ] && \
+        echo "error: invalid format \"$mimetype\", expected \"$regex\", file: $file" &&\
+        exit 1
+}
+
+expect_mime "audio/.*" $audio_file
+expect_mime "text/plain" $info_file
+
+# scrap tag and remove all tab characters
+extract_tag () {
+  awk -F= "/$1=/ {print \$2}" $info_file | tr -d "\t'"
+}
+
+artist="$(extract_tag "Albumperformer")"
+album="$(extract_tag "Albumtitle")"
+title="$(extract_tag "Tracktitle")"
+track_num="$(extract_tag "Track")"
+
+echo "Adding tags..."
+echo "Artist: $artist"
+echo "Album: $album"
+echo "title: $title"
+echo "Track No.: $track_num"
+
+id3v2 --album "$album" --artist "$artist" --song "$title" --track "$track_num" $audio_file
+
+ext=$(echo $audio_file | cut -d . -f2)
+
+# start from 0 if track is less than 10 for ordering purposes
+# example: "01 - TrackTitle"
+[ $track_num -lt "10" ] && track_num="0$track_num"
+
+mv $audio_file "$track_num - $title.$ext"
