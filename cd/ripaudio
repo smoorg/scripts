@@ -5,7 +5,7 @@
 # Description	: Simple script to rip wav, add tags and encode it with flac.
 # Args		:
 # Dependencies	: cdda2wav, flac, ls, xargs
-# Variables	:
+# Variables	: CD_DEVICE - device to use that's alternative to /dev/sr0
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
@@ -18,8 +18,17 @@ if [ -z "$CD_DEVICE" ]; then
     CD_DEVICE="/dev/sr0"
 fi
 
-# split audio into wav tracks
-cdda2wav -B -D $CD_DEVICE
+CD_DATABASE_URL="gnudb.gnudb.org"
+CD_DATABASE_PORT=443
+
+# split audio into wav tracks, as a consequence of cddb added, adds .inf file for each wav file as well
+cdda2wav -vall cddb=-1 speed=4 -paranoia paraopts=proof -B \
+    cddbp-server=$CD_DATABASE_URL \
+    cddbp-port=$CD_DATABASE_PORT \
+    -D $CD_DEVICE
 
 # create flac files
 ls audio_*.wav | xargs -I{} flac {}
+
+# tag flac files using .inf files
+ls audio_*.flac | sed "s/.flac$//g" | xargs -I{} inftags {}.flac {}.inf
