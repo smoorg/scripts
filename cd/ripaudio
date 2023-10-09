@@ -32,3 +32,6 @@ ls audio_*.wav | xargs -I{} flac {}
 
 # tag flac files using .inf files
 ls audio_*.flac | sed "s/.flac$//g" | xargs -I{} inftags {}.flac {}.inf
+
+# remove no longer needed files
+rm *.wav *.inf *.cd*
