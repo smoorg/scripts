@@ -11,11 +11,16 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
+set -e
+
+# the script is meant to be run initially from bashrc to avoid waiting for list of repositories
 if [ ! -f /tmp/cdrepo ]; then
     touch /tmp/cdrepo
     find $REPOS/ -maxdepth 4 -type d -name .git -prune | sed "s%$REPOS%%g; s/\/\.git//g" > /tmp/cdrepo 
+
+    echo "initial run to grab all the repositories... exiting" 
+    exit 0
 fi
 
 selected=$(cat /tmp/cdrepo | dmenu -l 10)
-
 [ -n "$selected" ] && echo $REPOS$selected
