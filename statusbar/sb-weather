@@ -21,9 +21,9 @@
 
 
 call_api() {
-    URL="https://api.openweathermap.org/data/2.5/weather?units=metric&lat=$OPEN_WEATHER_LAT&lon=$OPEN_WEATHER_LON&appid=$OPEN_WEATHER_KEY"
-    weather=$(curl --silent --max-time 5 $URL | jq '.main.temp')
-    [ -z "$weather" ] && echo "no results" && exit 1
+    URL="https://api.openweathermap.org/data/3.0/onecall?units=metric&exclude=hourly,daily&lat=$OPEN_WEATHER_LAT&lon=$OPEN_WEATHER_LON&appid=$OPEN_WEATHER_KEY"
+    weather=$(curl --silent --max-time 5 $URL | jq '.current.temp')
+    [ -z "$weather" ] && echo "error" && exit 1
     echo "$weather" > /tmp/current_weather
 }
 
