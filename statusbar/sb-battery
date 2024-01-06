@@ -2,8 +2,9 @@
 
 b_icon=''
 battery=$(cat /sys/class/power_supply/BAT0/capacity)
+charging=$(cat /sys/class/power_supply/BAT0/current_now 2>/dev/null)
 
-[ "$(cat /sys/class/power_supply/BAT0/current_now)" -gt 0 2>/dev/null ] &&\
+[ -n "$charging" ] && [ "$charging" -gt 0 ] &&\
 	plugged=1 ||\
 	plugged=0
 
