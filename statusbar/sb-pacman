@@ -1,0 +1,17 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: List of packages to install (sb-pacman)
+# Description	: wrapper on checkupdates to present list on the statusbar
+# Args		:
+# Dependencies	: cat, touch, wc
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+file=/tmp/pacman_updates
+
+[ ! -f "$file" ] && touch "$file"
+
+cat $file | wc -l
