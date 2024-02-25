@@ -31,8 +31,14 @@ packages+=" curl networkmanager networkmanager-openvpn openssh wget"
 ## I always install these to make my config dwm work
 packages+=" alacritty cronie dunst feh"
 
+# x stuff
+# packages+=" x11-ssh-askpass xcompmgr xdotool xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xsetroot "
+
+# wayland stuff
+packages+=" wl-copy wtype wl-randr"
+
 ## Required by my scripts
-packages+=" fzf ffmpeg grim slurp mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass wl-copy xcompmgr wtype xorg-server xorg-xev xorg-xinit xorg-xinput wl-randr xorg-xsetroot xreader xterm screenkey udisks2 screenkey brightnessctl"
+packages+=" fzf ffmpeg grim slurp mlocate mpv neomutt rsync sshfs sudo sxiv wget xreader xterm screenkey udisks2 screenkey brightnessctl"
 
 ( prompt "install audio rip tools? y/n" ) && packages+=" cdrtools flac"
 
