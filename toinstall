@@ -10,6 +10,8 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
+set -xe
+
 function prompt() {
     printf "\n"
     read -n 1 -p "$1: " yn
