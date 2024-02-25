@@ -2,31 +2,20 @@
 
 ###################################################################
 # Script Name	: Record (record)
-# Description	: Records screen's area provided by `slop`.
+# Description	: Records section of a screen.
 #		  When called second time the process gets killed, handy for a keybinding.
 # Args		: $1 - filename
-# Dependencies	: ffmpeg, dunst, slop, date
+# Dependencies	: slop-wayland, date
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-( pgrep -c ffmpeg > /dev/null ) &&\
-  pkill ffmpeg &&\
-  nots "Recording stopped!" &&\
-  exit 0
-filename="$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
-[ -n "$1" ] && filename=$1 
-echo $filename
+# TODO: probably obsolete, remove it for wayland or experiment with slop on wayland branch.
+
+filename=$1
+[ -z "$1" ] && filename="$HOME/Videos/screencast/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
 
 geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
 
-nots "Recording started!"
-#    -f alsa -ac 2 -i pulse -acodec aac \
-ffmpeg \
-    -f x11grab $geometry -pix_fmt yuv420p -preset slow -crf 22 -framerate 30 \
-    -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" \
-    "$filename"
-
-# failure
-[ "$?" -gt 0 ] && nots "Something went frong" "Recording failed." 
+wf-record --file=$filename

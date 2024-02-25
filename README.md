@@ -38,7 +38,7 @@ Most of my scripts use:
 - `mpc` and `ncmpcpp` for playing music
 - `sxiv` to pick a wallpaper 
 - `xrandr` to manage monitors and resolutions
-- `ffmpeg` for webcam preview (`webcam` script) and screen recording (`record` script)
+- `wl-recorder` for screen recording (`record` and `recordws` scripts)
 - `maim` for screenshots and screen area picking for `record`
 - `screenkey` specificly in `sctog` to start and stop `screenkey` application in the background
 - `udisks2` to manage usb drives
