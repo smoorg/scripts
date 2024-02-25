@@ -116,7 +116,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 	- [conmon](https://github.com/smoorg/scripts/blob/main/screen/conmon) - connect additional monitor (currently hardcoded to `right-of` so mostly for 2 monitors as of now)
 	- [light](https://github.com/smoorg/scripts/blob/main/screen/light) - increases and decreases brightness
 	- [night](https://github.com/smoorg/scripts/blob/main/screen/night) - runs redshift
-	- [screenshot](https://github.com/smoorg/scripts/blob/main/screen/screenshot) - copies screenshots to $SCREENSHOT_DIR as well as to your xclip
+	- [screenshot](https://github.com/smoorg/scripts/blob/main/screen/screenshot) - copies screenshots to $SCREENSHOT_DIR and keeps it under your clipboard
 	- [setwall](https://github.com/smoorg/scripts/blob/main/screen/setwall) - sets wallpaper
 	- [showmonitors](https://github.com/smoorg/scripts/blob/main/screen/showmonitors) - lists monitors
 	- [swapres](https://github.com/smoorg/scripts/blob/main/screen/swapres) - changes resolution and refresh rate
@@ -128,7 +128,7 @@ I try to group scripts into folders for maintenance but they also have functiona
 	- [kcs](https://github.com/smoorg/scripts/blob/main/keepassxc/kcs) - Keepass + rclone sync to update/merge database.
 - [askpass](https://github.com/smoorg/scripts/blob/main/askpass) - calls `dmenu-wl` for password, if `dmenu-wl` has -P flag (patch) it stars the input and sends it forward
 - [statusbar](https://github.com/smoorg/scripts/blob/main/statusbar) - dwm bar status bar scripts to present cpu and ram usage, volume, date and time, nothing fancy there
-- [emotes](https://github.com/smoorg/scripts/blob/main/emotes) - dumb script to present emotes and its tags and copy over needed one to the `xclip`
+- [emotes](https://github.com/smoorg/scripts/blob/main/emotes) - dumb script to present emotes and its tags and copy over to your application text input
 - [marktime](https://github.com/smoorg/scripts/blob/main/marktime) - sets timestamp and adds it to a file. Then substracts it from previous one to count time period. Can be used to track time
 - [scan](https://github.com/smoorg/scripts/blob/main/scan) - uses plugged in scanner and tries to scan image
 - [sshadd](https://github.com/smoorg/scripts/blob/main/sshadd) - picks ssh key from `dmenu-wl` to use with ssh-agent, asks for password using `askpass` if possible
