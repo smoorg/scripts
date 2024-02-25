@@ -4,14 +4,15 @@
 # Script Name	: Swap resolution (swapres)
 # Description	: Quick way to switch between resolutions and rates.
 # Args		:
-# Dependencies	: dmenu-wl, gawk, tail, tr, xrandr
+# Dependencies	: dmenu-wl, gawk, tail, tr, wl-randr
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
 monitor=$(
-  xrandr --listmonitors |\
+ # TODO: test that output works
+  wl-randr |\
   tail -n +2 |\
   awk '{ print $4 }' |\
   menu -l 5 -p "Pick monitor"
@@ -21,7 +22,7 @@ monitor=$(
 # tail -n with `+` sign tells tail to start from certain line, we skip first one as it's monitor's name not a resolution 
 # another awk just removes refresh rates as not needed
 record=$(
- xrandr |\
+ wl-randr |\
     awk -v monitor="$monitor connected" '/connected/ {p = 0}
     	$0 ~ monitor {p = 1}
         p' |\
@@ -40,6 +41,5 @@ scale=1
 
 resolution=$(echo $record | awk -F' ' '{print $1}')
 
-xrandr --output $monitor --mode $resolution --rate $rate --scale $scale
-
+wl-randr --output $monitor --mode $resolution@$rate
 setwall

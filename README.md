@@ -31,13 +31,12 @@ Most of my scripts use:
 - `dmenu-wl` for listing options 
 - `fzf` although I think the only one using `fzf` is `kcs` right now and possibly I'll move to `dmenu-wl` as well in future
 - `gnutils` such as `gawk`, `grep`, `tr`, `tail`, `head`, `echo`, `read`, `file`, `find`
-- `xrandr` for monitor scripts
 - `xinput` used in `touchtog`
 - `dunst` or another program for sending notifications via `notify-send`
 - either `amixer` or `pactl` depending on what you're using for sound
 - `mpc` and `ncmpcpp` for playing music
 - `sxiv` to pick a wallpaper 
-- `xrandr` to manage monitors and resolutions
+- `wl-randr` to manage monitors and resolutions
 - `wl-recorder` for screen recording (`record` and `recordws` scripts)
 - `grim` and `slurp` for screenshots
 - `screenkey` specificly in `sctog` to start and stop `screenkey` application in the background

@@ -13,4 +13,4 @@
 filename=$1
 [ -z "$1" ] && filename="$HOME/Videos/screencast/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
 
-wf-recorder --audio --file=$filename
+wf-recorder --file=$filename

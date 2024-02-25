@@ -4,7 +4,7 @@
 # Script Name	: Packages to install (toinstall)
 # Description	: Installs all the packages in short script
 # Args		:	
-# Dependencies	: sudo, pacman, xrandr
+# Dependencies	: sudo, pacman, wl-randr
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
@@ -32,7 +32,7 @@ packages+=" curl networkmanager networkmanager-openvpn openssh wget"
 packages+=" alacritty cronie dunst feh"
 
 ## Required by my scripts
-packages+=" fzf ffmpeg grim slurp mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass wl-copy xcompmgr wtype xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey udisks2 screenkey brightnessctl"
+packages+=" fzf ffmpeg grim slurp mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass wl-copy xcompmgr wtype xorg-server xorg-xev xorg-xinit xorg-xinput wl-randr xorg-xsetroot xreader xterm screenkey udisks2 screenkey brightnessctl"
 
 ( prompt "install audio rip tools? y/n" ) && packages+=" cdrtools flac"
 

@@ -11,11 +11,9 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-# TODO: probably obsolete, remove it for wayland or experiment with slop on wayland branch.
-
 filename=$1
+
 [ -z "$1" ] && filename="$HOME/Videos/screencast/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
+[ -f "$filename" ] && rm "$filename"
 
-geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
-
-wf-record --file=$filename
+wf-recorder --geometry "$(slurp)" --file="$filename"
