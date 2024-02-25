@@ -32,7 +32,7 @@ packages+=" curl networkmanager networkmanager-openvpn openssh wget"
 packages+=" alacritty cronie dunst feh"
 
 ## Required by my scripts
-packages+=" fzf ffmpeg maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass wl-copy xcompmgr wtype xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey udisks2 screenkey"
+packages+=" fzf ffmpeg maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-ssh-askpass wl-copy xcompmgr wtype xorg-server xorg-xev xorg-xinit xorg-xinput xorg-xrandr xorg-xsetroot xreader xterm screenkey udisks2 screenkey brightnessctl"
 
 ( prompt "install audio rip tools? y/n" ) && packages+=" cdrtools flac"
 
