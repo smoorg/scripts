@@ -4,7 +4,7 @@
 # Script Name	: Screenshot (screenshot)
 # Description	: Captures screen and saves it to clipboard
 # Args		: -s: prints whole screen instead of area
-# Dependencies	: convert, dunst, maim, mkdir, tee, wl-copy
+# Dependencies	: convert, dunst, grim, slurp, mkdir, tee, wl-copy
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
@@ -20,10 +20,10 @@ mkdir -p "$dirname"
 # i.e. 2022-12-31T00:01:59.png
 filename+="$(date --iso-8601=seconds).png"
 
-flags="$@ --color 0,0,0,0.3 --highlight -o $dirname/$filename"
+# screenshot
+grim -g "$(slurp)" -o $dirname/$filename
 
-maim $flags
-
+# copy screenshot to clipboard
 wl-copy < $dirname/$filename
 
 nots "Screenshot copied!" "Saved as:\n'$filename' at: \n '$dirname' folder"

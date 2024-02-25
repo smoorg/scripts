@@ -39,7 +39,7 @@ Most of my scripts use:
 - `sxiv` to pick a wallpaper 
 - `xrandr` to manage monitors and resolutions
 - `wl-recorder` for screen recording (`record` and `recordws` scripts)
-- `maim` for screenshots and screen area picking for `record`
+- `grim` and `slurp` for screenshots
 - `screenkey` specificly in `sctog` to start and stop `screenkey` application in the background
 - `udisks2` to manage usb drives
 
