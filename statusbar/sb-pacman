@@ -2,16 +2,39 @@
 
 ###################################################################
 # Script Name	: List of packages to install (sb-pacman)
-# Description	: wrapper on checkupdates to present list on the statusbar
+# Description	: Creates crontab for `pacman-contrib` checkupdates script.
+#                 Checks file content calculating no. of lines (packages to update).
 # Args		:
-# Dependencies	: cat, touch, wc
+# Dependencies	: cat, touch, wc, cronie, pacman-contrib
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-file=/tmp/pacman_updates
-
+# file to store number of packages to update
+file="/tmp/pacman_updates"
 [ ! -f "$file" ] && touch "$file"
 
+# put checkupdates result to the file
+croncmd="/usr/bin/checkupdates > $file"
+
+# crontab record every 10 minutes
+cronfn="* */10 * * * $croncmd"
+
+# returns error code when nothing found
+# note: ignoring cron period from $cronfn as you might want to modify it yourself
+crontab -l | grep -q "$croncmd"
+
+# check error code from grep > 0
+if [ "$?" -gt 0 ]; then
+    # append new element to the crontab
+    ( crontab -l; echo "$cronfn" ) | crontab -
+
+    # notify about the change
+    notify-send \
+        "sb-pacman: crontab has been modified" \
+        "Added $cronfn. \nsb-pacman needs it to refresh list of packages."
+fi
+
+# return number of lines in the file
 cat $file | wc -l
