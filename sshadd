@@ -2,10 +2,10 @@
 
 ###################################################################
 # Script Name	: SSH add key (sshadd)
-# Description	: Lists ~/.ssh directory and puts it to dmenu. 
+# Description	: Lists ~/.ssh directory and puts it to dmenu-wl. 
 #		  Makes it easier to pick an SSH key and add it to ssh-agent
 # Args		:
-# Dependencies	: dmenu, ssh, ssh-agent, ssh-add
+# Dependencies	: dmenu-wl, ssh, ssh-agent, ssh-add
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
@@ -17,9 +17,9 @@ KEY=$(ls $HOME/.ssh/ | menu -l 30 -p "Pick key to add to ssh agent:")
 # exit if key not picked
 [ -z $KEY ] && echo "no key provided, aborting" && exit 1
 
-# if dmenu has -P option ask for password through it
-if [ -n "$(man dmenu | grep -- '-P ')" ]; then
-    # trick ssh-add to use `askpass` script which wrapps around dmenu -P
+# if dmenu-wl has -P option ask for password through it
+if [ -n "$(man dmenu-wl | grep -- '-P ')" ]; then
+    # trick ssh-add to use `askpass` script which wrapps around dmenu-wl -P
     DISPLAY=:0
     SSH_ASKPASS=askpass
     ssh-add $@ "$HOME/.ssh/$KEY" < /dev/null

@@ -4,7 +4,7 @@
 # Script Name	: Emotes
 # Description	: A dumb way to store icons along with their tags to make them searchable
 # Args		:
-# Dependencies	: dmenu, tr, xdotool 
+# Dependencies	: dmenu-wl, tr, wtype 
 # Variables	:
 # Files used	: icons.txt
 # Author	: Mateusz Reszka
@@ -18,4 +18,4 @@ pick=$(cat $(dirname "$0")/icons.txt | menu -l 10)
 [ -z "$pick" ] && exit 0
 
 # pick only first character and insert it
-xdotool type $(echo "${pick%% *}")
+wtype type $(echo "${pick%% *}")

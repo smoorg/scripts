@@ -2,10 +2,10 @@
 
 ###################################################################
 # Script Name	: Repository cd (repocd)
-# Description	: Lists available repositories to dmenu and changes
+# Description	: Lists available repositories to dmenu-wl and changes
 #		  path, if picked. Use as alias with cd or `$ cd $(repocd)`
 # Args		:
-# Dependencies	: find, sed, dmenu
+# Dependencies	: find, sed, dmenu-wl
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz

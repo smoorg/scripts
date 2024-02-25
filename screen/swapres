@@ -4,7 +4,7 @@
 # Script Name	: Swap resolution (swapres)
 # Description	: Quick way to switch between resolutions and rates.
 # Args		:
-# Dependencies	: dmenu, gawk, tail, tr, xrandr
+# Dependencies	: dmenu-wl, gawk, tail, tr, xrandr
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz

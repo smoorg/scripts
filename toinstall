@@ -64,14 +64,15 @@ packages+=" fzf ffmpeg maim mlocate mpv neomutt rsync sshfs sudo sxiv wget x11-s
 
 # packages+=" ardour nethack newsboat pavucontrol wkhtmltopdf modemmanager"
 
-# For `askpass` script we need `dmenu` with password flag, hence my build. You can skip it and install `dmenu` from somewhere else if you won't use it.
-if ( prompt "install custom dmenu? y/n" ); then
-    gitcmd="git clone git@github.com:smoorg/dmenu"
-    [ -n "$REPOS" ] && gitcmd+=" $REPOS/dmenu"
-    $($gitcmd)
-    cd dmenu
-    make clean install
-fi
+# For `askpass` script we need `dmenu-wl` with password flag, hence my build. You can skip it and install `dmenu-wl` from somewhere else if you won't use it. Unfurtynately, I have not forked it yet.
+# TODO: fork dmenu-wl and introduce password plugin
+# if ( prompt "install custom dmenu? y/n" ); then
+#     gitcmd="git clone git@github.com:smoorg/dmenu"
+#     [ -n "$REPOS" ] && gitcmd+=" $REPOS/dmenu"
+#     $($gitcmd)
+#     cd dmenu
+#     make clean install
+# fi
 
 
 # Laptop specific packages, currently just wwan and wifi support 
