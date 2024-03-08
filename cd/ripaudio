@@ -22,7 +22,7 @@ CD_DATABASE_URL="gnudb.gnudb.org"
 CD_DATABASE_PORT=80
 
 # split audio into wav tracks, as a consequence of cddb added, adds .inf file for each wav file as well
-cdda2wav -vall cddb=-1 speed=4 -paranoia paraopts=proof -B \
+cdda2wav -vall cddb=-1 speed=2 -paranoia paraopts=proof -B \
     cddbp-server=$CD_DATABASE_URL \
     cddbp-port=$CD_DATABASE_PORT \
     -D $CD_DEVICE
