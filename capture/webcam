@@ -12,9 +12,11 @@
 
 WEBCAM=/dev/video0
 
-[ ! -z $1 ] && WEBCAM=/dev/video$1
+[ -n "$1" ] && WEBCAM=/dev/video$1 ||\
+    WEBCAM=$(find /dev -name "video*" | grep video | dmenu -l 12)
 
 mpv av://v4l2:$WEBCAM \
-  --demuxer-lavf-o=video_size=720x720 \
+  --demuxer-lavf-o=video_size=720x540 \
   --profile=low-latency \
-  --untimed
+  --untimed \
+  --quiet
