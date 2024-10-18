@@ -32,21 +32,20 @@ backup_dir="$HOME/.local/share/kcs/backups"
     mkdir -p $backup_dir
 
 backup_file_name="$(date +%F_%H:%M:%S).kdbx" # i.e. 2020-02-02_13:14:59.kdbx
-backup_full_dir="$backup_dir/$backup_file_name"
 
 # list remotes and pick one
-remote=$(rclone listremotes | sed 's/://g' | fzf --header='Provide remote name')
+[ -z "$remote" ] && remote=$(rclone listremotes | sed 's/://g' | fzf --header='Provide remote name')
+[ -z "$remote" ] && echo "pick remote" && exit 2
 
 # list remote kdbx files and pick one 
-remote_file=$(rclone lsl "onedrive:" --include "*.kdbx" --max-depth 2 |\
+[ -z "$remote_file" ] && remote_file=$(rclone lsl $remote --include "*.kdbx" --max-depth 2 |\
     awk '{print $4}' |\
-    fzf --header='Provide remote keepass db directory')
+    fzf --header='Provide remote keepass db file')
 
 # list local kdbx files and pick one
-local_file=$(find $find_main_folder -iname "*.kdbx" |\
-	fzf --header="Pick which local keepass directory")
+[ -z "$local_file" ] && local_file=$(find $find_main_folder -iname "*.kdbx" | fzf --header="Pick which local keepass directory")
 
-read -n 1 -r -p "Do you want to merge it? If not it will simply replace cloud's version with your local copy. y/n (default:y)"$'\n' merge
+[ -z "$merge" ] && read -n 1 -r -p "Do you want to merge it? If not it will simply replace cloud's version with your local copy. y/n (default:y)"$'\n' merge
 printf "\n"
 
 if [ "$merge" = y ]; then
@@ -57,26 +56,27 @@ if [ "$merge" = y ]; then
 
   printf "Download Finished!\n"
 
-  read -n 1 -p "Do you want to backup current db? y/n (default: n)"$'\n' yn
+  [ -z "$backup" ] && read -n 1 -p "Do you want to backup current db? y/n (default: n)"$'\n' backup
   printf "\n"
 
   # create backup directory if does not exist; -p for recursive folder creation
-  if [ "$yn" = y ]; then
+  if [ "$backup" = y ]; then
   	[ ! -d "$backup_dir" ] &&\
   		mkdir -p "$backup_dir" &&\
   		printf "backup directory created: %s\n" $backup_dir
 
+    backup_full_dir="$backup_dir/$backup_file_name"
     cp "$local_file" "$backup_full_dir"
-  	printf "backup file created at %s\n" $backup_full_dir
+    printf "backup file created at %s\n" $backup_full_dir
   fi
   
-  read -n 1 -p "Do you want to use key file? y/n (default: n)"$'\n' has_key
+  [ -z "$has_key" ] && read -n 1 -p "Do you want to use key file? y/n (default: n)"$'\n' has_key
   printf "\n"
 
   printf "Merging...\n"
 
   if [ "$has_key" = y ]; then
-  	key=$(find $find_main_folder | fzf --header="Provide a key file") &&\
+  	[ -z "$key" ] && key=$(find $find_main_folder | fzf --header="Provide a key file")
   	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials -k $key
   else
   	keepassxc-cli merge $local_file "$tmp_copy_dir/$remote_file" --same-credentials
