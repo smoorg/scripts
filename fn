@@ -1,0 +1,32 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: wfm - wifi flight mode
+# Description	: Toggles wifi connectivity
+# Args		:
+# Dependencies	: nmcli
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+cmd="nmcli radio wifi"
+# usually full or none
+status="$($cmd)"
+op="disabled"
+
+case "$status" in
+"enabled")
+	$cmd off
+	;;
+"disabled") 
+	$cmd on
+	;;
+*)
+	$cmd on
+	;;
+esac
+
+status="$($cmd)"
+notify-send "Flight mode toggled '$status'"
+
