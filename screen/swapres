@@ -35,6 +35,9 @@ rate=$(echo $record |\
     dmenu -l 15 -p "Pick refresh rate"
 )
 
+scale=1
+[ "$monitor" = "eDP-1" ] && scale=$(printf '0.5\n0.75\n1\n2' | dmenu -l 10 -p 'pick scale (the lower, the bigger): ')
+
 resolution=$(echo $record | awk -F' ' '{print $1}')
 
-xrandr --output $monitor --mode $resolution --rate $rate
+xrandr --output $monitor --mode $resolution --rate $rate --scale $scale
