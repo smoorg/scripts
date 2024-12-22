@@ -14,7 +14,7 @@ sinkid=$1
 
 [[ -z $sinkid ]] && sinkid=$(currsink);
 
-sinkids=$(pactl list sinks short | awk -F' ' '{print $1}')
+sinkids=$(pactl list sinks short | awk -F' ' '{print $2}')
 
 [[ "$sinkids" =~ "$sinkid" ]] &&\
     pactl set-sink-mute $sinkid toggle ||\

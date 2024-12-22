@@ -20,6 +20,12 @@ if [[ -n "$(pgrep -x pulseaudio)" ]]; then
             pactl set-sink-volume "$current_sink" +5%;
 	}
 	down() { pactl set-sink-volume "$current_sink" -5%; }
+elif [[ -n "$(pgrep -x pipewire)" ]]; then
+	up() {
+            [ "$curr_volume" -gt 99 ] && exit 0;
+            pactl set-sink-volume "$current_sink" +5%;
+	}
+	down() { pactl set-sink-volume "$current_sink" -5%; }
 else
 	up() { amixer set 'Master' 5%+; }
 	down() { amixer set 'Master' 5%-; }
