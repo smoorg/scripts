@@ -1,0 +1,19 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: waybard
+# Description	: waybar daemon used after dwl to run it after 
+#		  wayland session is up and running in the background
+# Args		:
+# Dependencies	: 
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+while true; do
+	if [ -n "$(pgrep dwl)" ]; then
+		bash -c "waybar"
+		exit 0
+	fi
+done

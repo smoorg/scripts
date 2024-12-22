@@ -5,24 +5,23 @@
 # Description	: Records screen's area provided by `slop`.
 #		  When called second time the process gets killed, handy for a keybinding.
 # Args		: $1 - filename
-# Dependencies	: ffmpeg, dunst, slop, date
+# Dependencies	: wf-recorder
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-( pgrep -c ffmpeg > /dev/null ) &&\
-  pkill ffmpeg &&\
-  nots "Recording stopped!" &&\
-  exit 0
+capture_dir="$HOME/Videos/capture"
+mkdir -p $capture_dir
 
-[ -n "$1" ] && filename=$1 || filename=$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4
+( pgrep -c wf-recorder > /dev/null ) &&\
+	pkill wf-recorder &&\
+	nots "Recording stopped!" &&\
+	exit 0
 
-geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
+filename=$1
+[ -z "$1" ] && filename="$capture_dir/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
+
+wf-recorder -g "$(slurp)" -f $filename
 
 nots "Recording started!"
-ffmpeg \
-    -f alsa -ac 2 -i pulse -acodec aac \
-    -f x11grab $geometry -pix_fmt yuv420p -preset slow -crf 22 -framerate 30 \
-    -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" \
-    "$filename"
