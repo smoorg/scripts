@@ -3,10 +3,10 @@
 case "$1" in
 	"on")
 		mmcli -m 3 -e
-		notify-send -t 10000 "Modem" "Modem turned on!"
+		nots "Modem" "Modem turned on!"
 		;;
 	"off")
 		mmcli -m 3 -d 
-		notify-send -t 10000 "Modem" "Modem turned down!"
+		nots "Modem" "Modem turned down!"
 		;;
 esac

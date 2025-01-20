@@ -32,4 +32,4 @@ esac >/dev/null
 
 curr_volume=$(volume)
 
-notify-send "Sound $1" "Sound $1 by 5% to $curr_volume"
+nots "Sound $1" "Sound $1 by 5% to $curr_volume"

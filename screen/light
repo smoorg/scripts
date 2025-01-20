@@ -16,4 +16,4 @@ xbacklight -inc $1
 
 curr_val=$(xbacklight -get | cut -d'.' -f 1)
 
-notify-send -t 10000 "Light" "Light modified by $1% up to $curr_val%"
+nots "Light" "Light modified by $1% up to $curr_val%"

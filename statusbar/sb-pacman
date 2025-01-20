@@ -31,7 +31,7 @@ if [ "$?" -gt 0 ]; then
     ( crontab -l; echo "$cronfn" ) | crontab -
 
     # notify about the change
-    notify-send \
+    nots \
         "sb-pacman: crontab has been modified" \
         "Added $cronfn. \nsb-pacman needs it to refresh list of packages."
 fi

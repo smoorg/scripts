@@ -13,7 +13,7 @@
 
 ( pgrep -c ffmpeg > /dev/null ) &&\
   pkill ffmpeg &&\
-  notify-send -t 10000 "Recording stopped!" &&\
+  nots "Recording stopped!" &&\
   exit 0
 
 filename=$1
@@ -21,7 +21,7 @@ filename=$1
 
 geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
 
-notify-send -t 10000 "Recording started!"
+nots "Recording started!"
 ffmpeg \
     -f alsa -ac 2 -i pulse -acodec aac \
     -f x11grab $geometry -pix_fmt yuv420p -preset slow -crf 22 -framerate 30 \

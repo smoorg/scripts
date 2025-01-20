@@ -37,4 +37,4 @@ ls audio_*.flac | sed "s/.flac$//g" | xargs -I{} inftags {}.flac {}.inf
 rm *.wav *.inf *.cd*
 
 # send done message
-notify-send -t 10000 "ripaudio" "All done!"
+nots "ripaudio" "All done!"

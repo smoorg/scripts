@@ -1,0 +1,13 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: Notify Send (nots)
+# Description	: Wrapper to notify-send to unify behavior across all scripts
+# Args		:
+# Dependencies	: dunst
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+notify-send -t 3000 "$1" "$2"
