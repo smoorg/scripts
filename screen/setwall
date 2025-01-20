@@ -11,6 +11,7 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-[[ -f $1 ]] && feh --bg-fill $1 && exit
+file=$WALLPAPER_FILE
+[ -f $1 ] && file=$1
 
-[[ -f $WALLPAPER_FILE ]] && feh --bg-fill $WALLPAPER_FILE
+[[ -f $file ]] && swaybg -i $file
