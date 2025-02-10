@@ -13,9 +13,5 @@
 filename=$1
 [ -z "$1" ] && filename="$(date +"%Y-%m-%dT%H-%M-%S").mp4"
 
-ffmpeg  -f x11grab -video_size 2560x1440 -i $DISPLAY \
-  -f alsa -i default \
-  -f pulse -i alsa_output.usb-HP_ENVY_34_00000000-00.iec958-stereo.monitor \
-  -c:v h264_nvenc -g 24 \
-  -b:v 4M -preset fast -c:a aac -pix_fmt yuv420p $filename  
-  # -af acompressor=threshold=0.089:ratio=9:attack=200:release=1000 \
+wf-recorder $filename
+
