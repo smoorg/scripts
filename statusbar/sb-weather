@@ -16,7 +16,6 @@
 #http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid=$OPEN_WEATHER_KEY
 
 [ -z "$OPEN_WEATHER_KEY" -o -z "$OPEN_WEATHER_LAT" -o -z "$OPEN_WEATHER_LON" ] &&\
-    echo "missing api key, latitude or longtitude env var" &&\
     exit 1
 
 

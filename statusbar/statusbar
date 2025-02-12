@@ -7,16 +7,22 @@ sbar=""
 [ $LAPTOP ] && sbar+="BATTERY: $(sb-battery)$SEPARATOR"
 sbar+="UPDATES: $(sb-pacman)"
 sbar+="$SEPARATOR"
-sbar+="TEMP: $(sb-weather)"
-sbar+="$SEPARATOR"
+
+weather=$(sb-weather)
+[ -n "$weather" ] && sbar+="TEMP: " && sbar+="$SEPARATOR"
+
 sbar+="UP: $(sb-uptime)"
 sbar+="$SEPARATOR"
+
 sbar+="CPU: $(sb-cpu)"
 sbar+="$SEPARATOR"
+
 sbar+="MEM: $(sb-memory)"
 sbar+="$SEPARATOR"
+
 sbar+="VOL: $(sb-volume)"
 sbar+="$SEPARATOR"
+
 sbar+="$(sb-clock)"
 
 echo $sbar

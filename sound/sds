@@ -10,7 +10,7 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-sink=$(pactl list short sinks | awk '{ print $2 }' | wmenu -l 6)
+sink=$(pactl list short sinks | awk '{ print $2 }' | dmenu -l 6)
 
 [ -z "$sink" ] && exit 0
 pactl set-default-sink $sink
