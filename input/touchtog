@@ -6,7 +6,7 @@
 #		  It finds device id and toggle it's `enable` prop.
 #		  You have to change $TOUCHPAD_ID to your own.
 # Args		:
-# Dependencies	: xinput, gawk, grep
+# Dependencies	: xinput, gawk
 # Variables	: $TOUCHPAD_ID - device id from `xinput` 
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
