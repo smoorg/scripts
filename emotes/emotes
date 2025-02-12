@@ -4,7 +4,7 @@
 # Script Name	: Emotes
 # Description	: A dumb way to store icons along with their tags to make them searchable
 # Args		:
-# Dependencies	: dmenu, tr, xdotool 
+# Dependencies	: wmenu, tr, xdotool 
 # Variables	:
 # Files used	: icons.txt
 # Author	: Mateusz Reszka
@@ -12,7 +12,7 @@
 ###################################################################
 
 # example how to add new content over vim: ctrl+v u208c
-pick=$(cat $(dirname "$0")/icons.txt | dmenu -l 10)
+pick=$(cat $(dirname "$0")/icons.txt | wmenu -l 10)
 
 # stop there if nothing has been picked
 [ -z "$pick" ] && exit 0

@@ -28,8 +28,8 @@ export PATH=$PATH:/usr/local/games:/usr/local/bin:$HOME/.local/share/application
 Most of my scripts use: 
 
 - `cdda2wav` to rip CD Audio discs into wav files and `flac` to compress them to loseless format
-- `dmenu` for listing options 
-- `fzf` although I think the only one using `fzf` is `kcs` right now and possibly I'll move to dmenu as well in future
+- `wmenu` for listing options 
+- `fzf` although I think the only one using `fzf` is `kcs` right now and possibly I'll move to wmenu as well in future
 - `gnutils` such as `gawk`, `grep`, `tr`, `tail`, `head`, `echo`, `read`, `file`, `find`
 - `xrandr` for monitor scripts
 - `xinput` used in `touchtog`

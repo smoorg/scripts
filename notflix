@@ -13,7 +13,7 @@ input=$(echo $input | tr ' ' '+')
 
 result=$(curl -s $baseUrl/search/$input/1/ |\
   grep -Eo '\/torrent\/[0-9]{0,7}\/[A-Za-z0-9-]{0,}\/' |\
-  dmenu -l 10
+  wmenu -l 10
 )
 
 magnet=$(curl -s "$baseUrl$result" | grep -Eo '"magnet:?.*"')

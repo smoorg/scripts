@@ -2,10 +2,10 @@
 
 ###################################################################
 # Script Name	: Repository cd (repocd)
-# Description	: Lists available repositories to dmenu and changes
+# Description	: Lists available repositories to wmenu and changes
 #		  path, if picked. Use as alias with cd or `$ cd $(repocd)`
 # Args		:
-# Dependencies	: find, sed, dmenu
+# Dependencies	: find, sed, wmenu
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
@@ -22,5 +22,5 @@ if [ ! -f /tmp/cdrepo ]; then
     exit 0
 fi
 
-selected=$(cat /tmp/cdrepo | dmenu -l 10)
+selected=$(cat /tmp/cdrepo | wmenu -l 10)
 [ -n "$selected" ] && echo $REPOS$selected

@@ -4,7 +4,7 @@
 # Script Name	: Swap resolution (swapres)
 # Description	: Quick way to switch between resolutions and rates.
 # Args		:
-# Dependencies	: dmenu, gawk, tail, tr, xrandr
+# Dependencies	: wmenu, gawk, tail, tr, xrandr
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
@@ -14,7 +14,7 @@ monitor=$(
   xrandr --listmonitors |\
   tail -n +2 |\
   awk '{ print $4 }' |\
-  dmenu -l 5 -p "Pick monitor"
+  wmenu -l 5 -p "Pick monitor"
 )
 
 # picks a subset using -v flag and p condition to print only those resolutions, that are under certain monitor
@@ -26,17 +26,17 @@ record=$(
     	$0 ~ monitor {p = 1}
         p' |\
     tail -n +2 |\
-    dmenu -l 15 -p "Pick resolution"
+    wmenu -l 15 -p "Pick resolution"
 )
 
 rate=$(echo $record |\
     tr -d '*+' |\
     awk '{for (f=1; f<=NF; f++) { if (f >1) print $f; } }' |\
-    dmenu -l 15 -p "Pick refresh rate"
+    wmenu -l 15 -p "Pick refresh rate"
 )
 
 scale=1
-[ "$monitor" = "eDP-1" ] && scale=$(printf '0.5\n0.75\n1\n2' | dmenu -l 10 -p 'pick scale (the lower, the bigger): ')
+[ "$monitor" = "eDP-1" ] && scale=$(printf '0.5\n0.75\n1\n2' | wmenu -l 10 -p 'pick scale (the lower, the bigger): ')
 
 resolution=$(echo $record | awk -F' ' '{print $1}')
 
