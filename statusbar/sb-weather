@@ -36,7 +36,7 @@ time=180
 [ -n "$1" ] && time=$1
 
 # or older than 3 hours
-[ ! -n "$(find /tmp -mmin -$time 2>/dev/null | grep /tmp/current_weather)" ] &&\
+[ ! -n "$(find /tmp -mmin -$time 2>/dev/null | grep "/tmp/current_weather")" ] &&\
     call_api
 
 [ ! -s /tmp/current_weather ] && call_api

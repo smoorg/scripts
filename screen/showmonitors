@@ -4,9 +4,9 @@
 # Script Name	: Show monitors (showmonitors)
 # Description	: Lists connected display output names
 # Args		:
-# Dependencies	: xrandr, grep, awk
+# Dependencies	: xrandr, awk
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-xrandr | awk -F+ '/ connected/ {print }'
+xrandr | awk '/ connected/ {print }'
