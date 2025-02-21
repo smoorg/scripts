@@ -14,10 +14,13 @@
 defaultOutput="eDP1"
 [ -n $DEFAULT_OUTPUT ] && defaultOutput=$DEFAULT_OUTPUT 
 
-# takes all connected outputs but the default one
-outputs=$(xrandr | awk -F='[=[]' -v def="$defaultOutput" '$1 !~ def && / connected/ {print $1}')
+IFS='\n'
 
-echo $defaultOutput $outputs
+# takes all connected outputs but the default one
+outputs=$(xrandr |\
+    awk -F='[=[]' -v def="$defaultOutput" '$1 !~ def && / connected/ { print $1 }' |\
+    awk '{ print $1 }'
+)
 
 # puts all connected outputs to right of the default one
 for output in $outputs; do
