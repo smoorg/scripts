@@ -16,8 +16,7 @@
   nots "Recording stopped!" &&\
   exit 0
 
-filename=$1
-[ -z "$1" ] && filename="$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
+[ -n "$1" ] && filename=$1 || filename=$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4
 
 geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
 
