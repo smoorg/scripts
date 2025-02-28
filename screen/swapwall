@@ -11,8 +11,7 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-[ -f "$1" ] && cp $1 $WALLPAPER_DIR
+[ -f "$1" ] && cp $1 $WALLPAPER_FILE
+cp $(sxiv -tro $WALLPAPERS_DIR | head -n 1) $WALLPAPER_FILE
 
-sxiv -tro $WALLPAPERS_DIR |\
-    xargs -I{} cp -f {} $WALLPAPER_DIR &&\
-    setwall
+setwall

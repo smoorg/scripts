@@ -54,7 +54,7 @@ SCRIPTS_DIR=$HOME/repos/private/scripts
 
 # a file that supposed to be used as your wallpaper i.e. `$HOME/wallpaper.png` 
 # used by: setwall, swapwall 
-WALLPAPER_DIR=$HOME/wall.png
+WALLPAPER_FILE=$HOME/.local/wallpaper.png
 
 # directory with your wallpapers, i.e. `$HOME/Pictures/wallpapers` 
 # used by: setwall, swapwall 

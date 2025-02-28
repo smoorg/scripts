@@ -13,4 +13,4 @@
 
 [[ -f $1 ]] && feh --bg-fill $1 && exit
 
-[[ -f $WALLPAPER_DIR ]] && feh --bg-fill $WALLPAPER_DIR
+[[ -f $WALLPAPER_FILE ]] && feh --bg-fill $WALLPAPER_FILE
