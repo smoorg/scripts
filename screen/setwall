@@ -5,13 +5,18 @@
 # Description	: Script to change a wallpaper by calling feh in $1 if provided, otherwise in $WALLPAPER_DIR.
 #		  and call `setwall`. If no file provided sxiv is opened to pick one.
 # Args		: $1 - (optional) wallpaper directory
-# Dependencies	: feh
-# Variables	: $WALLPAPER_DIR
+# Dependencies	: swaybg
+# Variables	: $WALLPAPER_FILE
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-file=$WALLPAPER_FILE
-[ -f $1 ] && file=$1
+[ -f "$1" ] && file="$1" || file="$WALLPAPER_FILE"
+echo $file
 
-[[ -f $file ]] && swaybg -i $file
+# fail if no such file
+[[ ! -f $file ]] && exit 1 && nots "File does not exist" "$file"
+
+# kill previous processes & trigger new swaybg instance
+pkill swaybg 
+bash -c "swaybg -i $file" &
