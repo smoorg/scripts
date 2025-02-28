@@ -45,19 +45,40 @@ Most of my scripts use:
 
 ## Variables
 
-There are few scripts that expects you to have certain variables to be set in order to work.
+There are few scripts that expects you to have certain variables to be set in order to work. Here's default config to source into .bashrc:
 
-|var|description|used by|
-|-|-|-|
-|SCRIPTS_DIR|self explainatory, your scripts directory|-|
-|WALLPAPER_DIR|a file that supposed to be used as your wallpaper i.e. `$HOME/wallpaper.png`|setwall, swapwall|
-|WALLPAPERS_DIR|directory with your wallpapers, i.e. `$HOME/Pictures/wallpapers`|setwall, swapwall|
-|SCREENSHOT_DIR|directory with your screenshots, i.e. `$HOME/Pictures/screenshots`|screenshot|
-|KEEPASS_DIR|directory with your keepass database, i.e. `$HOME/Keepass/`|kcs|
-|DEFAULT_OUTPUT|default output for screen manipulation like change resolution, i.e. DP-4`|conmon|
-|TOUCHPAD_ID|touchpad device id to toggle it off|touchtog, tpadstatus|
-|OPEN_WEATHER_KEY|api key to make weather widget on dwm statusbar work|weather|
+```bash
+# self explainatory, your scripts directory
+# used by: nothing, add it to PATH in .bashrc
+SCRIPTS_DIR=$HOME/repos/private/scripts
 
+# a file that supposed to be used as your wallpaper i.e. `$HOME/wallpaper.png` 
+# used by: setwall, swapwall 
+WALLPAPER_DIR=$HOME/wall.png
+
+# directory with your wallpapers, i.e. `$HOME/Pictures/wallpapers` 
+# used by: setwall, swapwall 
+WALLPAPERS_DIR=$HOME/Pictures/wallpapers
+
+# directory with your screenshots, i.e. `$HOME/Pictures/screenshots` 
+# used by: screenshot
+SCREENSHOT_DIR=$HOME/Pictures/screenshots
+
+# directory with your keepass database, i.e. `$HOME/Keepass/` 
+# used by: `kcs`
+KEEPASS_DIR=$HOME/Documents/KeePass
+
+# default output for screen manipulation like change resolution, i.e. DP-4` conmon 
+DEFAULT_OUTPUT=eDP-1
+
+# touchpad device id to toggle it off touchtog, 
+# used by: tpadstatus, touchtog
+TOUCHPAD_ID=
+
+# api key to make weather widget on dwm statusbar work
+# used by: sb-weather
+OPEN_WEATHER_KEY= 
+```
 
 ## Description
 
