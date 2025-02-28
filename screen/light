@@ -10,10 +10,20 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-[ -z "$1" ]  && exit 1;
+# script expects these to be called
+# $ echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' > /etc/udev/rules.d/backlight.rules
+# $ usermod -aG video [your_user]
 
-xbacklight -inc $1
 
-curr_val=$(xbacklight -get | cut -d'.' -f 1)
+[ -z "$1" ]  && echo "empty string" exit 1
 
-nots "Light" "Light modified by $1% up to $curr_val%"
+max_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/max_brightness)
+curr_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/brightness)
+new_val=$(( $curr_val + $1 ))
+
+[ "$new_val" -gt "$max_val" ] && new_val=$max_val
+echo $new_val
+
+echo $new_val > /sys/class/backlight/$BACKLIGHT_DEVICE/brightness
+
+nots "Light" "Light modified by $1% up to $new_val%"
