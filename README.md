@@ -78,6 +78,10 @@ TOUCHPAD_ID=
 # api key to make weather widget on dwm statusbar work
 # used by: sb-weather
 OPEN_WEATHER_KEY= 
+
+# backlight device located at /sys/class/backlight/$device
+# used by: light
+BACKLIGHT_DEVICE=
 ```
 
 ## Description
