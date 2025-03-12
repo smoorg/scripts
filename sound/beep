@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ffplay -autoexit -nodisp /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga
