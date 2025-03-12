@@ -13,4 +13,9 @@
 
 [[ -f $1 ]] && feh --bg-fill $1 && exit
 
-[[ -f $WALLPAPER_FILE ]] && feh --bg-fill $WALLPAPER_FILE
+# fail if no such file
+[[ ! -f $file ]] && exit 1 && nots "File does not exist" "$file"
+
+# kill previous processes & trigger new swaybg instance
+pkill swaybg 
+bash -c "swaybg -i $file --mode fill" &
