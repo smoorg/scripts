@@ -1,0 +1,6 @@
+#!/bin/sh
+
+lang=$(ls /usr/share/X11/xkb/symbols | dmenu -l 10 -p "Pick language")
+
+[ -z "$lang" ] && exit 0
+setxkbmap $lang
