@@ -4,25 +4,25 @@ SEPARATOR=" | "
 
 sbar=""
 
-[ $LAPTOP ] && sbar+="BATTERY: $(sb-battery)$SEPARATOR"
-sbar+="UPDATES: $(sb-pacman)"
+[ -n $LAPTOP ] && sbar+="$(sb-battery)$SEPARATOR"
+sbar+="󱧕 $(sb-pacman)"
 sbar+="$SEPARATOR"
 
 weather=$(sb-weather)
-[ -n "$weather" ] && sbar+="TEMP: " && sbar+="$SEPARATOR"
+[ -n "$weather" ] && sbar+="" && sbar+="$SEPARATOR"
 
-sbar+="UP: $(sb-uptime)"
+sbar+=" $(sb-uptime)"
 sbar+="$SEPARATOR"
 
-sbar+="CPU: $(sb-cpu)"
+sbar+=" $(sb-cpu)"
 sbar+="$SEPARATOR"
 
-sbar+="MEM: $(sb-memory)"
+sbar+=" $(sb-memory)"
 sbar+="$SEPARATOR"
 
-sbar+="VOL: $(sb-volume)"
+sbar+=" $(sb-volume)"
 sbar+="$SEPARATOR"
 
-sbar+="$(sb-clock)"
+sbar+=" $(sb-clock)"
 
 echo $sbar

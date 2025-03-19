@@ -20,16 +20,16 @@ case $((
 	(battery >= 70 && battery < 80)	* 8 +
 	(battery >= 80 && battery < 90)	* 9 +
 	(battery >= 90)			* 10)) in
-	(1) b_icon=;;
-	(2) b_icon=;;
-	(3) b_icon=;;
-	(4) b_icon=;;
-	(5) b_icon=;;
-	(6) b_icon=;;
-	(7) b_icon=;;
-	(8) b_icon=;;
-	(9) b_icon=;;
-	(10) b_icon=;;
+	(1) b_icon=;;
+	(2) b_icon=;;
+	(3) b_icon=;;
+	(4) b_icon=;;
+	(5) b_icon=;;
+	(6) b_icon=;;
+	(7) b_icon=;;
+	(8) b_icon=;;
+	(9) b_icon=;;
+	(10) b_icon=;;
 esac
 
 [ "$plugged" -eq "1" ] && b_icon=""
