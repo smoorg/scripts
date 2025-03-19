@@ -1,5 +1,43 @@
 ✓ check tick
-€ euro currency
+$ currency dollar
+¢ currency cent
+€ currency euro
+₠ currency euro sign
+£ currency pound
+¥ currency yen
+ƒ currency latin small letter f with currency hook
+֏ currency armenian dram currency sign
+؋ currency afghani sign
+৲ currency bengali rupee mark
+৳ currency bengali rupee sign
+૱ currency gujarati rupee sign
+௹ currency tamil rupee sign
+฿ currency thai currency symbol baht
+¤ currency khmer currency symbol riel
+ℳ currency script capital m
+ currency rial sign
+₭ currency KIP Laos
+₮ currency TUGRIK Mongolia
+₯ currency DRACHMA Greece
+₰ currency GERMAN PENNY
+₱ currency PESO Filipino peso sign
+₧ currency peseta sign
+₲ currency GUARANI Paraguay
+₳ currency AUSTRAL Australia
+₴ currency HRYVNIA Ukraine
+₵ currency CEDI Ghana
+₶ currency LIVRE TOURNOIS France from 13th-18th centuries
+₷ currency SPESMILO historical international currency associated with Esperanto
+₸ currency TENGE Kazakhstan
+₿ currency bitcoin
+〒 postal mark
+₹ currency INDIAN RUPEE
+र devanagari letter ra
+₺ currency TURKISH LIRA
+₻ currency NORDIC MARK early representation of the Mark currency used in Denmark and Norway
+₼ currency MANAT Azerbaijan
+₽ currency RUBLE Russia
+₾ currency LARI Georgia
 ° degree celsius farenheit
 ™ trademark
 ® registered trademark
