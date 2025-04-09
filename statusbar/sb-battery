@@ -2,8 +2,13 @@
 
 b_icon=''
 battery_id=$(ls /sys/class/power_supply/ | grep BAT | head -n 1)
+
 battery=$(cat /sys/class/power_supply/$battery_id/capacity)
-charging=$(cat /sys/class/power_supply/BAT0/current_now 2>/dev/null)
+status=$(cat /sys/class/power_supply/$battery_id/status)
+
+[[ "Charging" = "$status" ]] \
+    && charging=1 \
+    || charging=0
 
 [ -n "$charging" ] && [ "$charging" -gt 0 ] &&\
 	plugged=1 ||\
@@ -20,18 +25,18 @@ case $((
 	(battery >= 70 && battery < 80)	* 8 +
 	(battery >= 80 && battery < 90)	* 9 +
 	(battery >= 90)			* 10)) in
-	(1) b_icon=;;
-	(2) b_icon=;;
-	(3) b_icon=;;
-	(4) b_icon=;;
-	(5) b_icon=;;
-	(6) b_icon=;;
-	(7) b_icon=;;
-	(8) b_icon=;;
-	(9) b_icon=;;
-	(10) b_icon=;;
+	(1) b_icon=󰁺;;
+	(2) b_icon=󰁻;;
+	(3) b_icon=󰁼;;
+	(4) b_icon=󰁽;;
+	(5) b_icon=󰁾;;
+	(6) b_icon=󰁿;;
+	(7) b_icon=󰂀;;
+	(8) b_icon=󰂁;;
+	(9) b_icon=󰂂;;
+	(10) b_icon=󰁹;;
 esac
 
-[ "$plugged" -eq "1" ] && b_icon=""
+[ "$plugged" -eq "1" ] && b_icon="󰂄"
 
 echo "$b_icon $battery%"
