@@ -15,14 +15,18 @@
   pkill ffmpeg &&\
   nots "Recording stopped!" &&\
   exit 0
-
-[ -n "$1" ] && filename=$1 || filename=$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4
+filename="$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
+[ -n "$1" ] && filename=$1 
+echo $filename
 
 geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
 
 nots "Recording started!"
+#    -f alsa -ac 2 -i pulse -acodec aac \
 ffmpeg \
-    -f alsa -ac 2 -i pulse -acodec aac \
     -f x11grab $geometry -pix_fmt yuv420p -preset slow -crf 22 -framerate 30 \
     -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" \
     "$filename"
+
+# failure
+[ "$?" -gt 0 ] && nots "Something went frong" "Recording failed." 
