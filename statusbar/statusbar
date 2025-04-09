@@ -5,14 +5,14 @@ SEPARATOR=" | "
 sbar=""
 
 [ -n $LAPTOP ] && sbar+="$(sb-battery)$SEPARATOR"
-sbar+="󱧕 $(sb-pacman)"
+sbar+="󰏔 $(sb-pacman)"
 sbar+="$SEPARATOR"
 
 weather=$(sb-weather)
 [ -n "$weather" ] && sbar+="" && sbar+="$SEPARATOR"
 
-sbar+=" $(sb-uptime)"
-sbar+="$SEPARATOR"
+#sbar+=" $(sb-uptime)"
+#sbar+="$SEPARATOR"
 
 sbar+=" $(sb-cpu)"
 sbar+="$SEPARATOR"
@@ -23,6 +23,6 @@ sbar+="$SEPARATOR"
 sbar+=" $(sb-volume)"
 sbar+="$SEPARATOR"
 
-sbar+=" $(sb-clock)"
+sbar+=" $(sb-clock)"
 
 echo $sbar
