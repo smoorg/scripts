@@ -15,8 +15,8 @@
 file="/tmp/pacman_updates"
 [ ! -f "$file" ] && touch "$file"
 
-# put checkupdates result to the file
-croncmd="/usr/bin/checkupdates > $file"
+# put checkupdates result to the file, redirect stderr
+croncmd="/usr/bin/checkupdates > $file 2>&1"
 
 # crontab record every 10 minutes
 cronfn="* */10 * * * $croncmd"
