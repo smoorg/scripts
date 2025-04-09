@@ -41,3 +41,5 @@ scale=1
 resolution=$(echo $record | awk -F' ' '{print $1}')
 
 xrandr --output $monitor --mode $resolution --rate $rate --scale $scale
+
+setwall
