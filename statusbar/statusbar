@@ -4,12 +4,12 @@ SEPARATOR=" | "
 
 sbar=""
 
-[ -n $LAPTOP ] && sbar+="$(sb-battery)$SEPARATOR"
+[ -n "$LAPTOP" ] && sbar+="$(sb-battery)$SEPARATOR"
 sbar+="󰏔 $(sb-pacman)"
 sbar+="$SEPARATOR"
 
 weather=$(sb-weather)
-[ -n "$weather" ] && sbar+="" && sbar+="$SEPARATOR"
+[ -n "$weather" ] && sbar+="$weather " && sbar+="$SEPARATOR"
 
 #sbar+=" $(sb-uptime)"
 #sbar+="$SEPARATOR"
