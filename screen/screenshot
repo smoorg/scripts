@@ -10,6 +10,9 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
+[ ! -x "/usr/bin/grim" ] && notify-send "no grim installed" && exit 1
+[ ! -x "/usr/bin/slurp" ] && notify-send "no slurp installed" && exit 1
+
 # use ~/Pictures/screenshots or $SCREENSHOT_DIR if exists
 dirname="$HOME/Pictures/screenshots"
 [ -d $SCREENSHOT_DIR ] && dirname="$SCREENSHOT_DIR"
@@ -21,9 +24,14 @@ mkdir -p "$dirname"
 filename+="$(date --iso-8601=seconds).png"
 
 # screenshot
-grim -g "$(slurp)" -o $dirname/$filename
+grim -g "$(slurp)" "$dirname/$filename"
+
+# hack to make following check work
+sleep 1s
+
+[ ! -f "$dirname/$filename" ] && notify-send "grim had issues with creating a file" && exit 1
 
 # copy screenshot to clipboard
-wl-copy < $dirname/$filename
+wl-copy < "$dirname/$filename"
 
 nots "Screenshot copied!" "Saved as:\n'$filename' at: \n '$dirname' folder"
