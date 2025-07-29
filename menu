@@ -1,0 +1,13 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: menu
+# Description	: menu alias for specific DE (for now xorg and wayland)
+# Args		:
+# Dependencies	: 
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+dmenu $@
