@@ -10,7 +10,8 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-if [[ -n "$(pgrep -x pulseaudio)" || -n "$(pgrep -x pipewire-pulse)" ]]; then
+
+if [[ $(which pw-top) || $(which pactl) ]]; then
     curr_volume=$(pactl get-sink-volume $(currsink) | awk 'FNR == 1 {print $5}')
 else
     curr_volume=$(amixer sget Master | awk '/%/ {print $5}' | tr -d [] | head -n 1)

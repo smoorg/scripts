@@ -15,7 +15,7 @@
   pkill ffmpeg &&\
   nots "Recording stopped!" &&\
   exit 0
-filename="$HOME/Videos/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
+filename="$HOME/Videos/capture/$(date +"%Y-%m-%dT%H-%M-%S").mp4"
 [ -n "$1" ] && filename=$1 
 echo $filename
 

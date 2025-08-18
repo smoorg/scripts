@@ -1,0 +1,13 @@
+#!/bin/sh
+
+###################################################################
+# Script Name	: listmon - list monitors
+# Description	: lists monitors
+# Args		:
+# Dependencies	: 
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+xrandr | awk -F='[=[]' '/ connected/ { print $1 }' | awk '{ print $1 }'

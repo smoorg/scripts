@@ -4,7 +4,7 @@
 # Script Name	: Connect monitor (moncon)
 # Description	: Connets a new monitor to the right of existing one.
 # Args		:
-# Dependencies	: gawk, xrandr, setwall
+# Dependencies	: gawk, xrandr, setwall, listmon
 # Variables	: $DEFAULT_OUTPUT
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
@@ -17,10 +17,7 @@ defaultOutput="eDP1"
 IFS='\n'
 
 # takes all connected outputs but the default one
-outputs=$(xrandr |\
-    awk -F='[=[]' -v def="$defaultOutput" '$1 !~ def && / connected/ { print $1 }' |\
-    awk '{ print $1 }'
-)
+outputs=$(listmon | grep -v 'eDP-1')
 
 # puts all connected outputs to right of the default one
 for output in $outputs; do

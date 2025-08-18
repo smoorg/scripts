@@ -12,7 +12,7 @@
 ###################################################################
 
 # file to store number of packages to update
-file="/tmp/pacman_updates"
+file="$HOME/.cache/pacman_updates"
 [ ! -f "$file" ] && touch "$file"
 
 # put checkupdates result to the file, redirect stderr
