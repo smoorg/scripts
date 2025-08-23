@@ -10,20 +10,31 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-# script expects these to be called
-# $ echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' > /etc/udev/rules.d/backlight.rules
+# add user to video group to use that script
 # $ usermod -aG video [your_user]
 
+# create config file
+brightness_file=/etc/udev/rules.d/backlight.rules
+[ ! -f "$brightness_file" ] && nots "Light", "No such config file: $brightness_file" && exit 1
 
-[ -z "$1" ]  && echo "empty string" exit 1
+count=$(grep -c 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' $brightness_file || $(nots "Light" "grep failed" && exit 1))
+if [ "$count" -eq "0" ]; then
+	echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"' > \
+	    $brightness_file
+fi
+
+[ -z "$1" -o "$1" == "0" ]  && nots "Light" "Script was called with '$1' percents to increase. Exiting." && exit 1
 
 max_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/max_brightness)
+max_val_1_prec=$(( $max_val/100 ))
 curr_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/brightness)
-new_val=$(( $curr_val + $1 ))
+new_val=$(( $curr_val + (( $1*$max_val_1_prec )) ))
+
+echo $new_val
 
 [ "$new_val" -gt "$max_val" ] && new_val=$max_val
-echo $new_val
+[ "$new_val" -lt "0" ] && new_val=1
 
 echo $new_val > /sys/class/backlight/$BACKLIGHT_DEVICE/brightness
 
-nots "Light" "Light modified by $1% up to $new_val%"
+nots "Light" "Light modified by $1% up to $(( $new_val*100/$max_val )) %"
