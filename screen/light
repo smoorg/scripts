@@ -15,17 +15,19 @@
 # $ usermod -aG video [your_user]
 
 [ -z "$1" ]  && echo "empty string" exit 1
-[ $1 -gt 0 ] && brightnessctl set +$1%
-[ $1 -lt 0 ] && brightnessctl set $1%
 
-curr_val=$(brightnessctl get | cut -d'.' -f 1)
+if [ -x brightnessctl ]; then
+    [ $1 -gt 0 ] && brightnessctl set +$1%
+    [ $1 -lt 0 ] && brightnessctl set $1%
+    perc=$(brightnessctl get | cut -d'.' -f 1)
+else
+    max_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/max_brightness)
+    curr_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/brightness)
 
-max_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/max_brightness)
-curr_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/brightness)
-new_val=$(( $curr_val + $1 ))
+    new_val=$(($curr_val + (( $1 * $max_val / 100 )) ))
+    [ "$new_val" -gt "$max_val" ] && new_val=$max_val
 
-[ "$new_val" -gt "$max_val" ] && new_val=$max_val
+    echo $new_val > /sys/class/backlight/$BACKLIGHT_DEVICE/brightness
+fi
 
-echo $new_val > /sys/class/backlight/$BACKLIGHT_DEVICE/brightness
-
-nots "Light" "Light modified by $1% up to $new_val%"
+#nots "Light" "Light modified by $1% up to $perc%"
