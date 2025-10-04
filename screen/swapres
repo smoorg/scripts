@@ -10,36 +10,40 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-monitor=$(
- # TODO: test that output works
-  wl-randr |\
-  tail -n +2 |\
-  awk '{ print $4 }' |\
-  menu -l 5 -p "Pick monitor"
-)
+names=$(wlr-randr --json | jq '.[].name')
 
-# picks a subset using -v flag and p condition to print only those resolutions, that are under certain monitor
-# tail -n with `+` sign tells tail to start from certain line, we skip first one as it's monitor's name not a resolution 
-# another awk just removes refresh rates as not needed
-record=$(
- wl-randr |\
-    awk -v monitor="$monitor connected" '/connected/ {p = 0}
-    	$0 ~ monitor {p = 1}
-        p' |\
-    tail -n +2 |\
-    menu -l 15 -p "Pick resolution"
-)
+# find all enabled screens
+declare -a enabled_screens
+for name in ${names[@]}; do
+    name=$(echo $name | tr -d '"')
+    enabled=$(wlr-randr --output $name | grep -q "Enabled: yes")
+    [ "$?" -eq 0 ] && enabled_screens+="$name"
+done
 
-rate=$(echo $record |\
-    tr -d '*+' |\
-    awk '{for (f=1; f<=NF; f++) { if (f >1) print $f; } }' |\
-    menu -l 15 -p "Pick refresh rate"
-)
+# let user pick one
+monitor=$(echo $enabled_screens | menu -l 15 -p "Pick monitor")
+[ -z $monitor ] && notify "No screen picked, exiting" && exit 1
 
-scale=1
-[ "$monitor" = "eDP-1" ] && scale=$(printf '0.5\n0.75\n1\n2' | menu -l 10 -p 'pick scale (the lower, the bigger): ')
+output=$(wlr-randr --output $monitor --json)
 
-resolution=$(echo $record | awk -F' ' '{print $1}')
+nrates=$(echo $output | jq '.[].modes | length')
+declare -a modes
+for rate in $(seq 0 $(( $nrates - 1 )) ); do
+    picked=''
 
-wl-randr --output $monitor --mode $resolution@$rate
+    mode=$(echo "$output" | jq ".[].modes[$rate]")
+
+    width=$(echo $mode | jq '.width')
+    height=$(echo $mode | jq '.height')
+    refresh=$(echo $mode | jq '.refresh')
+    current=$(echo $mode | jq '.current')
+    [ "$current" == "true" ] && picked='x'
+
+    modes+="${width}x${height}@${refresh}Hz\n"
+done
+
+mode=$(printf "$modes" | menu -l 5 -p "Pick resolution")
+
+wlr-randr --output $monitor --mode $mode
+
 setwall
