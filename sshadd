@@ -5,7 +5,7 @@
 # Description	: Lists ~/.ssh directory and puts it to dmenu-wl. 
 #		  Makes it easier to pick an SSH key and add it to ssh-agent
 # Args		:
-# Dependencies	: dmenu-wl, ssh, ssh-agent, ssh-add
+# Dependencies	: menu, ssh, ssh-agent, ssh-add
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz

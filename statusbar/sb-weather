@@ -26,13 +26,12 @@ call_api() {
     echo "$weather" > /tmp/current_weather
 }
 
-# call api if no cached weather
+# call api if no cached weather (file does not exist)
 [ ! -f /tmp/current_weather ] &&\
     call_api
 
 # time in minutes
 time=180
-
 [ -n "$1" ] && time=$1
 
 # or older than 3 hours

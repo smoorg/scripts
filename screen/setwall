@@ -11,11 +11,13 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-[[ -f $1 ]] && feh --bg-fill $1 && exit
+file=$WALLPAPER_FILE
+[[ -f $1 ]] && file=$1
 
 # fail if no such file
-[[ ! -f $file ]] && exit 1 && nots "File does not exist" "$file"
+[[ ! -f $file ]] && nots "File does not exist" "$file" && exit 1
+echo "went all the way here"
 
 # kill previous processes & trigger new swaybg instance
 pkill swaybg 
-bash -c "swaybg -i $file --mode fill" &
+bash -c "swaybg --mode fill -i $file" &

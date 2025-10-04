@@ -12,10 +12,10 @@
 
 format='png'
 
-[[ -z "$1" ]] && filename=$(echo "" | menu -f -p "Provide filename") || filename=$1
+[[ -z "$1" ]] && filename=$(echo "" | menu -p "Provide filename") || filename=$1
 [[ -z "$filename" ]] && echo "File name not provided" && exit 1
 
-device=$(scanimage -f "%d%n" -n | menu -l 15 -p "Select printer:")
+device=$(scanimage -f "%d%n" -n | menu -l 15 -p "Printer")
 [[ -z "$device" ]] && echo "Device not selected" && exit 1
 
 resolution=$(scanimage -d $device -A -n | grep 'resolution auto' | sed -r 's/(--resolution auto[|]{2})//g; s/\[(\w){2,3}\]//g; s/ //g; s/dpi//g; s/\|/\n/g' | menu -l 15 -p "Provide resolution (default 150dpi)")
