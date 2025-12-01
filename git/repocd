@@ -22,5 +22,5 @@ if [ ! -f /tmp/cdrepo ]; then
     exit 0
 fi
 
-selected=$(cat /tmp/cdrepo | menu -l 10)
+selected=$(cat /tmp/cdrepo | menu)
 [ -n "$selected" ] && echo $REPOS$selected

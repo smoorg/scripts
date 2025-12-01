@@ -18,4 +18,4 @@ pick=$(cat $(dirname "$0")/icons.txt | menu -l 10)
 [ -z "$pick" ] && exit 0
 
 # pick only first character and insert it
-wtype type $(echo "${pick%% *}")
+wtype "${pick%% *}"

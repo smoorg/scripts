@@ -16,14 +16,12 @@ KEY=$(ls $HOME/.ssh/ | menu -l 30 -p "Pick key to add to ssh agent:")
 
 # exit if key not picked
 [ -z $KEY ] && echo "no key provided, aborting" && exit 1
+echo "$HOME/.ssh/$KEY"
 
-# if dmenu-wl has -P option ask for password through it
-if [ -n "$(man dmenu-wl | grep -- '-P ')" ]; then
-    # trick ssh-add to use `askpass` script which wrapps around dmenu-wl -P
-    DISPLAY=:0
-    SSH_ASKPASS=askpass
-    ssh-add $@ "$HOME/.ssh/$KEY" < /dev/null
+if [ -x /usr/bin/secret-tool ]; then 
+    ssh-add $HOME/.ssh/$KEY
     exit 0
 fi
 
 ssh-add $@ "$HOME/.ssh/$KEY"
+
