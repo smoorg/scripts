@@ -10,7 +10,7 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-sink=$(pl | awk '{ print $2 }' | menu -i -l 6)
+sink=$(pl | awk '{ print $2 }' | menu)
 
 [ -z "$sink" ] && exit 0
 pactl set-default-sink $sink
