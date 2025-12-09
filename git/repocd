@@ -22,5 +22,5 @@ if [ ! -f /tmp/cdrepo ]; then
     exit 0
 fi
 
-selected=$(cat /tmp/cdrepo | menu)
+selected=$(cat /tmp/cdrepo | gum filter)
 [ -n "$selected" ] && echo $REPOS$selected

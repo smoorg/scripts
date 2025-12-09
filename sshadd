@@ -12,7 +12,7 @@
 ###################################################################
 
 # pick a key
-KEY=$(ls $HOME/.ssh/ | menu -l 30 -p "Pick key to add to ssh agent:")
+KEY=$(ls $HOME/.ssh/ | menu)
 
 # exit if key not picked
 [ -z $KEY ] && echo "no key provided, aborting" && exit 1
