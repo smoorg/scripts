@@ -12,6 +12,6 @@
 ###################################################################
 
 [ -f "$1" ] && cp $1 $WALLPAPER_FILE
-cp $(sxiv -tro $WALLPAPERS_DIR | head -n 1) $WALLPAPER_FILE
+cp $(sxiv -topr $WALLPAPERS_DIR | head -n 1) $WALLPAPER_FILE
 
 setwall
