@@ -15,5 +15,5 @@ if [ -n "$(pgrep -x redshift)" ]; then
     pkill redshift 
 else
     nots "Night mode started"
-    redshift -l 55.7:12.6 -t 5700:3600 -g 0.8 -m randr -v > /dev/null 2>&1 &
+    gammastep -l 55.7:12.6 -t 5700:2600 > /dev/null 2>&1 &
 fi

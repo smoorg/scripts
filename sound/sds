@@ -10,14 +10,16 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-sink=$(pl | awk '{ print $2 }' | menu)
+sink=$(pl | awk '{ print $2 }' | menu -i -l 6)
+prev_sink=$(currsink)
 
 [ -z "$sink" ] && exit 1
 pactl set-default-sink $sink
 
 to_move=$(pactl list sink-inputs short | awk -F ' ' '{print $1}')
-def_sink=$(currsink)
 
-for i in $to_move; do
-    pactl move-sink-input $i $def_sink
-done
+#for i in "$to_move"; do
+#    pactl move-sink-input $prev_sink $i
+#done
+
+notify-send "Sink changed!" "sound from '$prev_sink' redirected to '$sink'"
