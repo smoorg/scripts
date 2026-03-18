@@ -54,3 +54,13 @@ $ currency dollar
 ├ box side left
 ┤ box side right
 ¯\_(ツ)_/¯ shrug
+← arrow left
+↑ arrow up
+→ arrow right
+↓ arrow down
+↔ arrow horizontal left right
+↕ arrow vertical up down
+↖ arrow top left corner
+↗ arrow top right corner
+↘ arrow bottom right corner
+↙ arrow bottom left corner
