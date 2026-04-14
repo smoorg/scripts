@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+###################################################################
+# Script Name	: adbcam (Android Debugger camera)
+# Description	: Simple script to use a phone as a webcam
+# Args		:
+# Dependencies	: awk, fzf, sudo, modprobe, adb, scrcpy
+# Variables	:
+# Author	: Mateusz Reszka
+# Email		: mateusz@mateuszreszka.xyz
+###################################################################
+
+bin_required () {
+    type $1 > /dev/null 2>&1
+    [ "$?" != "0" ] && echo "$1 is required to run this script" && exit 1
+}
+bin_required fzf
+bin_required awk
+bin_required awk
+bin_required modprobe
+bin_required adb
+bin_required scrcpy
+
+set -e
+
+CARD_LABEL="AdbCam"
+DEFAULT_FPS="30"
+V4L2_DEVICE=""
+
+# create loopback device with CARD_LABEL if none
+loopback_module=$(lsmod | grep v4l2loopback)
+if [ -z "$loopback_module" ]; then
+    sudo modprobe v4l2loopback devices=1 video_nr=0 card_label="${CARD_LABEL}" exclusive_caps=1
+fi
+
+# find CARD_LABEL device ID, set it to $V4L2_DEVICE
+for i in /sys/class/video4linux/video* ; do
+    name=$(cat "$i/name")
+    if [ "$name" = "$CARD_LABEL" ]; then
+	V4L2_DEVICE=/dev/$(basename $i)
+    fi
+done
+
+declare -A devices
+devices=$(
+    adb devices | grep -v "*" | awk -F'\t' '/device$/ { print $2 }'
+) 
+if [ -z "$devices" ]; then
+    echo "[!] No ADB devices found in 'device' state
+[*] Please ensure:
+    1. Your Android device is connected via USB
+    2. USB debugging is enabled on your device
+    3. You have authorized this computer on your device
+    4. ADB is properly installed
+[*] Try running 'adb devices' manually to troubleshoot"
+    exit 1
+fi
+
+echo "[+] Found Adb device(s)"
+for i in "$devices[@]"; do
+    echo $i
+done
+
+list_cameras=$(scrcpy --list-cameras 2>/dev/null)
+cams=$(echo "$list_cameras" | awk '/camera-id=/ { print }')
+
+
+if [ -z "$cams" ]; then
+    echo "[!] SETUP FAILED: Could not get camera information
+[*] This usually means:
+    1. No ADB device is connected
+    2. The device doesn't support camera access via scrcpy
+    3. Camera permissions are not granted"
+    exit 1
+fi
+
+cam_pick=$(echo "$cams" | fzf --header "Pick Camera")
+[ -z "$cam_pick" ] && "echo cam not picked, exiting" && exit 0
+
+# cam_pick looks like this: --camera-id=2 (...)
+# first parse anything after spacebars to get '--camera-id=2'
+# then parse second param by = delim
+cam_id=$(echo "$cam_pick" | awk '{ print $1 }' | awk -F= '{ print $2 }' | tr -d '\t\n ')
+
+fps="30"
+read -n 1 -s -p "Use default fps of $fps? y/n" yn
+if [ "$yn" != "y" ]; then
+    fps=$(
+	echo "$cam_pick" |\
+	    awk -v "id=camera-id=$cam_id" '$0 ~ id { print }' |\
+	    awk -F"=" '{print $3}' |\
+	    tr -d ' ()[]' |\
+	    tr ',' '\n' |\
+	    fzf --header "Pick FPS"
+)
+fi
+
+printf "\n"
+
+res="1920x1080"
+read -n 1 -p "Use default resolution of $res? y/n " yn
+if [ "$yn" != "y" ]; then
+    res=$(
+    scrcpy --list-camera-sizes 2>/dev/null |\
+    awk -v id="$cam_id" '    /--camera-id=/ { current = ($0 ~ "--camera-id="id"[^0-9]"); next }
+      current && /^[[:space:]]+-/ { gsub(/^[[:space:]]+-*/, ""); print }' |\
+	  grep -v fps | tr -d ' ' | fzf)
+fi
+
+scrcpy --video-source=camera --port 27183 --no-window --no-audio \
+    --camera-id=${cam_id} \
+    --v4l2-sink=${V4L2_DEVICE} \
+    --camera-size=${res} \
+    --camera-fps=${fps}
+
