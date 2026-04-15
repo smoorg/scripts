@@ -21,8 +21,6 @@ bin_required modprobe
 bin_required adb
 bin_required scrcpy
 
-set -e
-
 CARD_LABEL="AdbCam"
 DEFAULT_FPS="30"
 V4L2_DEVICE=""
