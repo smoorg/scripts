@@ -24,10 +24,13 @@ else
     max_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/max_brightness)
     curr_val=$(cat /sys/class/backlight/$BACKLIGHT_DEVICE/brightness)
 
-    new_val=$(($curr_val + (( $1 * $max_val / 100 )) ))
+    new_val=$(($curr_val + (( "$1" * $max_val / 100 )) ))
     [ "$new_val" -gt "$max_val" ] && new_val=$max_val
+
+    perc="$(echo "scale=2; ($new_val/$max_val)*100" | bc)"
+    perc=${perc%%.*}
 
     echo $new_val > /sys/class/backlight/$BACKLIGHT_DEVICE/brightness
 fi
 
-#nots "Light" "Light modified by $1% up to $perc%"
+nots "Light" "Light modified by $1% up to $perc%"
