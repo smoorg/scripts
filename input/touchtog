@@ -12,16 +12,44 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-deviceid=$TOUCHPAD_ID
-prop=$(xinput list-props $deviceid | awk -F'[()]' '/Enabled/ {print $2}')
-enabled=$(xinput list-props $deviceid | awk '/Enabled/ {print $4}')
+if [ -z $TOUCHPAD_ID ]; then
+devices="/proc/bus/input/devices"
+device_name=$(
+    awk -F: '$1 ~ "N"' $devices |\
+    fzf --prompt "Pick device"
+)
+    device_id=$(
+	awk -v "id=$device_name" '$0 ~ id { l = 1 } l && l++ < 4' $devices |\
+	    awk -F'=' '$1 ~ "S: Sysfs" { print $2 }'
+    )
 
-echo $prop
-echo $enabled
-if [[ "$enabled" -eq "1" ]]; then
-	xinput set-prop $deviceid $prop 0
-	echo "touchpad off"
-else
-	xinput set-prop $deviceid $prop 1
-	echo "touchpad on"
+    [ -z "$device_id" ] && exit 1
+    export TOUCHPAD_ID="$device_id"
 fi
+
+
+inhibited="/sys$TOUCHPAD_ID/inhibited"
+state=$(cat "$inhibited")
+
+printf "file\n $inhibited"
+
+# # river has riverctl command for that
+ # if (pgrep -x river >/dev/null); then
+ #     device=$(riverctl list-inputs | awk '/^[A-z0-9:_]+/ { print }' | grep -i "touchpad" | tail)
+ #
+ #     cmd="enabled"
+ #     riverctl list-inputs | awk -v "id=$device" '$0 ~ id {p=1} p && p++<=2' | grep -q "configured: true"
+ #     [ "$?" = "0" ] && cmd="disabled"
+ #
+ #     riverctl input $device events $cmd
+ #
+ #     exit 0
+ # fi
+
+
+if [ "$state" = "0" ]; then
+    echo 1 > "$inhibited"
+else
+    echo 0 > "$inhibited"
+fi
+

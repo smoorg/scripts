@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 ###################################################################
 # Script Name	: adbcam (Android Debugger camera)
@@ -10,25 +10,25 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-bin_required () {
-    type $1 > /dev/null 2>&1
-    [ "$?" != "0" ] && echo "$1 is required to run this script" && exit 1
-}
-bin_required fzf
-bin_required awk
-bin_required awk
-bin_required modprobe
-bin_required adb
-bin_required scrcpy
+for i in fzf awk modprobe adb scrcpy; do
+    type $i > /dev/null 2>&1
+    [ "$?" != "0" ] && echo "$i is required to run this script" && exit 1
+done
 
 CARD_LABEL="AdbCam"
 DEFAULT_FPS="30"
 V4L2_DEVICE=""
+FPS="30"
+RES="1920x1080"
 
 # create loopback device with CARD_LABEL if none
 loopback_module=$(lsmod | grep v4l2loopback)
 if [ -z "$loopback_module" ]; then
-    sudo modprobe v4l2loopback devices=1 video_nr=0 card_label="${CARD_LABEL}" exclusive_caps=1
+    sudo modprobe v4l2loopback \
+	devices=1 \
+	video_nr=0 \
+	exclusive_caps=1 \
+	card_label="${CARD_LABEL}"
 fi
 
 # find CARD_LABEL device ID, set it to $V4L2_DEVICE
@@ -72,42 +72,57 @@ if [ -z "$cams" ]; then
     exit 1
 fi
 
-cam_pick=$(echo "$cams" | fzf --header "Pick Camera")
-[ -z "$cam_pick" ] && "echo cam not picked, exiting" && exit 0
+CAM_PICK=$(echo "$cams" | fzf --header "Pick Camera")
+[ -z "$CAM_PICK" ] && "echo cam not picked, exiting" && exit 0
 
-# cam_pick looks like this: --camera-id=2 (...)
+# CAM_PICK looks like this: --camera-id=2 (...)
 # first parse anything after spacebars to get '--camera-id=2'
 # then parse second param by = delim
-cam_id=$(echo "$cam_pick" | awk '{ print $1 }' | awk -F= '{ print $2 }' | tr -d '\t\n ')
-
-fps="30"
-read -n 1 -s -p "Use default fps of $fps? y/n" yn
-if [ "$yn" != "y" ]; then
-    fps=$(
-	echo "$cam_pick" |\
-	    awk -v "id=camera-id=$cam_id" '$0 ~ id { print }' |\
-	    awk -F"=" '{print $3}' |\
-	    tr -d ' ()[]' |\
-	    tr ',' '\n' |\
-	    fzf --header "Pick FPS"
+CAM_ID=$(echo "$CAM_PICK" |\
+    awk '{ print $1 }' |\
+    awk -F= '{ print $2 }' |\
+    tr -d '\t\n '
 )
+
+[ -z "$CAM_ID" ] && echo "no cam id" && exit 1
+
+read -n 1 -s -p "Use default fps of $fps? y/n" yn
+
+if [ "$yn" != "y" ]; then
+    FPS=$(
+	echo "$CAM_PICK" |\
+	awk -v "id=camera-id=$CAM_ID" '$0 ~ id { print }' |\
+	awk -F"=" '{print $3}' |\
+	tr -d ' ()[]' |\
+	tr ',' '\n' |\
+	fzf --header "Pick FPS"
+    )
 fi
 
 printf "\n"
 
-res="1920x1080"
-read -n 1 -p "Use default resolution of $res? y/n " yn
+awk_script='
+/--camera-id=/ { current = ($0 ~ "--camera-id="id"[^0-9]"); next } 
+current && /^[[:space:]]+-/ { gsub(/^[[:space:]]+-*/, ""); print }
+' 
+
+read -n 1 -p "Use default resolution of $RES? y/n " yn
 if [ "$yn" != "y" ]; then
-    res=$(
-    scrcpy --list-camera-sizes 2>/dev/null |\
-    awk -v id="$cam_id" '    /--camera-id=/ { current = ($0 ~ "--camera-id="id"[^0-9]"); next }
-      current && /^[[:space:]]+-/ { gsub(/^[[:space:]]+-*/, ""); print }' |\
-	  grep -v fps | tr -d ' ' | fzf)
+    RES=$(
+	scrcpy --list-camera-sizes 2>/dev/null |\
+	awk -v id="$CAM_ID" $awk_script |\ 
+	grep -v fps |\
+	tr -d ' ' |\
+	fzf
+    )
 fi
 
-scrcpy --video-source=camera --port 27183 --no-window --no-audio \
-    --camera-id=${cam_id} \
+scrcpy --video-source=camera \
+    --port 27183 \
+    --no-window \
+    --no-audio \
+    --camera-id=${CAM_ID} \
     --v4l2-sink=${V4L2_DEVICE} \
-    --camera-size=${res} \
-    --camera-fps=${fps}
+    --camera-size=${RES} \
+    --camera-fps=${FPS}
 

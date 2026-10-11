@@ -16,25 +16,60 @@
 #http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid=$OPEN_WEATHER_KEY
 
 [ -z "$OPEN_WEATHER_KEY" -o -z "$OPEN_WEATHER_LAT" -o -z "$OPEN_WEATHER_LON" ] &&\
-    exit 1
-
+    echo "no key, lat and/or longtitude" && exit 1
 
 call_api() {
     URL="https://api.openweathermap.org/data/3.0/onecall?units=metric&exclude=hourly,daily&lat=$OPEN_WEATHER_LAT&lon=$OPEN_WEATHER_LON&appid=$OPEN_WEATHER_KEY"
-    weather=$(curl --silent --max-time 5 $URL | jq '.current.temp')
-    [ -z "$weather" ] && echo "error" && exit 1
-    echo "$weather" > /tmp/current_weather
+    json=$(curl --silent --max-time 5 --fail "$URL")
+
+    # curl returns err 22 when rest status is >= 400
+    [ $? -eq 22 ] && exit 1
+
+    temp=$(echo "$json" | jq '.current.temp')
+
+    condition=$(echo "$json" | jq '.current.weather.[0].main' | tr -d '"')
+    desc_cond=$(echo "$json" | jq '.current.weather.[0].description' | tr -d '"')
+
+    case ${condition,,} in
+	clouds) 
+	    if [ "$desc_cond" = "overcast clouds" ]; then
+		condition=🌥
+	    else
+		condition=🌤
+	    fi
+	    ;;
+
+	*) condition=☼;;
+    esac
+
+    if [ "$1" == "--raw" ]; then
+	echo $json | jq | cat
+	exit 0
+    fi
+
+    [ -z "$temp" -o "$temp" == "null" ] && exit 1
+    echo "$condition $temp" > /tmp/current_weather
 }
+
+while test $# -gt 0; do
+    case "$1" in
+        -r|--raw)
+	    call_api --raw
+	    shift
+	    exit 0
+	    ;;
+    esac
+done
 
 # call api if no cached weather (file does not exist)
 [ ! -f /tmp/current_weather ] &&\
     call_api
 
+
 # time in minutes
-time=180
+time=300
 [ -n "$1" ] && time=$1
 
-# or older than 3 hours
 [ ! -n "$(find /tmp -mmin -$time 2>/dev/null | grep "/tmp/current_weather")" ] &&\
     call_api
 

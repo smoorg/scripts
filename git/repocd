@@ -17,9 +17,6 @@ set -e
 if [ ! -f /tmp/cdrepo ]; then
     touch /tmp/cdrepo
     find $REPOS/ -maxdepth 5 -type d -name .git -prune | sed "s%$REPOS%%g; s/\/\.git//g" > /tmp/cdrepo 
-
-    echo "initial run to grab all the repositories... exiting" 
-    exit 0
 fi
 
 selected=$(cat /tmp/cdrepo | gum filter)

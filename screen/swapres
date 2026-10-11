@@ -4,46 +4,56 @@
 # Script Name	: Swap resolution (swapres)
 # Description	: Quick way to switch between resolutions and rates.
 # Args		:
-# Dependencies	: dmenu-wl, gawk, tail, tr, wl-randr
+# Dependencies	: dmenu-wl, tail, tr, wl-randr
 # Variables	:
 # Author	: Mateusz Reszka
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-names=$(wlr-randr --json | jq '.[].name')
+set +x
+declare -a names
+
+names=$(wlr-randr --json | jq '.[].name' | tr '\n' ' ' | tr -d '"' )
 
 # find all enabled screens
 declare -a enabled_screens
 for name in ${names[@]}; do
-    name=$(echo $name | tr -d '"')
-    enabled=$(wlr-randr --output $name | grep -q "Enabled: yes")
-    [ "$?" -eq 0 ] && enabled_screens+="$name"
+    name=$(echo "$name" | tr -d '"')
+    wlr-randr --output "$name" | grep -q "Enabled: yes"
+    [ "$?" -eq 0 ] && enabled_screens+=( "$name" ) && echo "added $name"
 done
 
 # let user pick one
-monitor=$(echo $enabled_screens | menu -l 15 -p "Pick monitor")
+monitor=$(
+    printf "%s\n%s\n" "${enabled_screens[@]}" |\
+	menu -l 15 -p "Pick monitor"
+)
 [ -z $monitor ] && notify "No screen picked, exiting" && exit 1
 
 output=$(wlr-randr --output $monitor --json)
+echo $output | jq '.[].modes | length'
+exit 0
 
-nrates=$(echo $output | jq '.[].modes | length')
-declare -a modes
+nrates=$(echo "$output" | jq '.[].modes | length')
+modes=""
 for rate in $(seq 0 $(( $nrates - 1 )) ); do
     picked=''
 
     mode=$(echo "$output" | jq ".[].modes[$rate]")
 
-    width=$(echo $mode | jq '.width')
-    height=$(echo $mode | jq '.height')
-    refresh=$(echo $mode | jq '.refresh')
-    current=$(echo $mode | jq '.current')
+    width=$(echo "$mode" | jq '.width')
+    height=$(echo "$mode" | jq '.height')
+    refresh=$(echo "$mode" | jq '.refresh')
+    current=$(echo "$mode" | jq '.current')
     [ "$current" == "true" ] && picked='x'
 
     modes+="${width}x${height}@${refresh}Hz\n"
 done
+echo "$modes"
+exit 0
 
-mode=$(printf "$modes" | menu -l 5 -p "Pick resolution")
+mode=$(echo "$modes" | menu -l 5 -p "Pick resolution")
 
-wlr-randr --output $monitor --mode $mode
+wlr-randr --output "$monitor" --mode "$mode"
 
 setwall

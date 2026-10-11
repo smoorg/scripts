@@ -12,16 +12,17 @@
 ###################################################################
 
 # pick a key
-KEY=$(ls $HOME/.ssh/ | menu)
+KEY=$(find "$HOME"/.ssh/ | menu)
 
 # exit if key not picked
-[ -z $KEY ] && echo "no key provided, aborting" && exit 1
+[ -z "$KEY" ] && echo "no key provided, aborting" && exit 1
 echo "$HOME/.ssh/$KEY"
 
-if [ -x /usr/bin/secret-tool ]; then 
-    ssh-add $HOME/.ssh/$KEY
-    exit 0
-fi
+# if [ -x /usr/bin/secret-tool ]; then 
+#     ssh-add "$HOME/.ssh/$KEY"
+#     exit 0
+# fi
 
-ssh-add $@ "$HOME/.ssh/$KEY"
+# ssh-add $@ "$HOME/.ssh/$KEY"
+ssh-add "$HOME/.ssh/$KEY"
 

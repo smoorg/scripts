@@ -11,14 +11,15 @@
 # Email		: mateusz@mateuszreszka.xyz
 ###################################################################
 
-( pgrep -c wf-recorder > /dev/null ) &&\
-    pkill wf-recorder &&\
-    nots "Recording stopped!" &&\
+if ( pgrep -c wf-recorder > /dev/null ); then
+    pkill wf-recorder
+    nots "Recording stopped!"
     exit 0
+fi
 
-filename=$1
+filename="$HOME/Videos/screencast/$(date +"%Y-%m-%dT%H-%M-%S").mkv"
 
-[ -z "$1" ] && filename="$HOME/Videos/screencast/$(date +"%Y-%m-%dT%H-%M-%S").mkv"
+[ -n "$1" ] && filename="$1"
 [ -f "$filename" ] && rm "$filename"
 
 nots "Recording started!"
