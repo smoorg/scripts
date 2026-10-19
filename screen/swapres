@@ -12,7 +12,6 @@
 
 set +x
 declare -a names
-
 names=$(wlr-randr --json | jq '.[].name' | tr '\n' ' ' | tr -d '"' )
 
 # find all enabled screens
@@ -30,13 +29,11 @@ monitor=$(
 )
 [ -z $monitor ] && notify "No screen picked, exiting" && exit 1
 
-output=$(wlr-randr --output $monitor --json)
-echo $output | jq '.[].modes | length'
-exit 0
+output=$(wlr-randr --json | jq --arg monitor "$monitor" 'map(select(.name == $monitor))')
 
-nrates=$(echo "$output" | jq '.[].modes | length')
-modes=""
-for rate in $(seq 0 $(( $nrates - 1 )) ); do
+nrates=$(echo "$output" | jq '.[0].modes | length')
+declare -A modes
+for rate in $(seq 0 $(( nrates - 1 )) ); do
     picked=''
 
     mode=$(echo "$output" | jq ".[].modes[$rate]")
@@ -49,10 +46,8 @@ for rate in $(seq 0 $(( $nrates - 1 )) ); do
 
     modes+="${width}x${height}@${refresh}Hz\n"
 done
-echo "$modes"
-exit 0
 
-mode=$(echo "$modes" | menu -l 5 -p "Pick resolution")
+mode=$(printf "$modes" | menu -l 5 -p "Pick resolution")
 
 wlr-randr --output "$monitor" --mode "$mode"
 
